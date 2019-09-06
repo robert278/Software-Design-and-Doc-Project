@@ -1,0 +1,1 @@
+System that updates the most up-voted racetracks on a leader board. The votes reset every year.
