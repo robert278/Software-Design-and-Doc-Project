@@ -1,0 +1,30 @@
+If we are making a racing game similar to Mario Kart Wii:
+
+Core Verbs (through the mechanic of Driving):
+-Movement 
+-Turning (Drift)
+
+Secondary Mechanics [technically not necessary]:
+-Items (Specifically, Position-Based Rubber-banding)
+-Boost Panels
+-Ramps (Airtime & Gravity Calculations)
+-Car Weight & Collision Calculations
+
+Nouns [this is where artists can ¡®polish¡¯]:
+-The race tracks 
+-The racers
+
+
+(Use engineer art to make an abstract version of the nouns)
+	-Use a red plane to mark ¡®lava¡¯ or a geometric terrain 	with notes of what it is supposed to be so that if the 	project continues artists can be recruited to polish.
+
+	-If you want to replicate a lava geyser from Mario Kart 	you make a red cylindrical shape and put in 	documentation what it is supposed to be so artists can 	add texture later.
+
+The nice part about racing games is that polish through art is not a necessity to the game feel. Games like MOBAs and RPGs need to have abstract representations polished so that players understand what they are ¨C but racing games are more mechanically focused. Physics contribute to game feel.
+
+3 Ways to derive something original: 
+	[Subvert, Deconstruct, Combine] 
+This deconstructs item systems and then combines them with the individuality of a MOBA ¨C Each ¡®character¡¯ has their own set of items to obtain through acquiring ¡®Spell Stars¡¯.
+Why Spell Stars? Item boxes are a copyrighted icon from Mario Kart (Capsules Sonic, Crates Crash Bandicoot).
+
+Also aim to make every track a ¡®cross-country¡¯ (Mt. Wario).
