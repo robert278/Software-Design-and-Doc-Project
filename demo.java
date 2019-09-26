@@ -1,9 +1,12 @@
-package demo;
-
 import org.jfugue.player.Player;
 
 public class demo {
-  public static void main(String[] args) {
+  
+  public demo() {
+  
+  }
+  
+  public void playMelody(boolean isDisjunct) {
     Player player = new Player();
     
     int notesplayed = 0;
@@ -13,7 +16,7 @@ public class demo {
     //DISJUNCT -> LEAPS
     
     int disjunct = 1;
-   if(disjunct == 1) { 
+    if(isDisjunct) { 
 	   while(true) {
 	    	//	(int)(Math.random() * ((max - min) + 1)) + min
 	    	// It's interesting, randomly generating notes between C4 and C5
@@ -47,9 +50,8 @@ public class demo {
 	    	previousNote = number;
 	    }
 	  }
-   
-    int conjunct = 1;
-    if(conjunct == 1) {
+     
+     else {
 	    int previousLeap = 0;
 		int number = (int)((Math.random() * 9) - 1);
 	    while(true) {
