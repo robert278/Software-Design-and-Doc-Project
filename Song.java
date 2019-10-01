@@ -8,6 +8,10 @@ public class Song {
       song = "";
    }
    
+   public Song(String s) {
+      song = s;
+   }
+   
    public boolean AcceptPatterns(ArrayList<Pattern> patternBank) {
       String newSong = "";
       for(int i = 0; i < patternBank.size(); i++) {
