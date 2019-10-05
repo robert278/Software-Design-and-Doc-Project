@@ -8,7 +8,7 @@ class PatternBank {
       bank = new ArrayList<Pattern>();
    }
    
-   public ArrayList<Pattern> getPatterns(int numPatterns) { // TODO: discuss way to get by type
+   public ArrayList<Pattern> getPatterns(int numPatterns) { // TODO: discuss way to get by type. ANSWER: Use many methods, getHappy, getSad
       int numPatternsToGet = Math.min(bank.size(), numPatterns);
       ArrayList<Pattern> returnedPatterns = new ArrayList<Pattern>();
       for(int i = 0; i < numPatternsToGet; i++) {
