@@ -1,5 +1,5 @@
 import org.jfugue.pattern.Pattern;
 
-interface PatternRuleSet {
+public interface PatternRuleSet {
    Pattern generatePattern();
 }
