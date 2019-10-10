@@ -12,7 +12,6 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
    private CheckboxGroup keySignature, timeSignature, instruments, tempo, durationofPiece, emotions, melodyType;
    private Checkbox chkDisjunct;
    private Checkbox chkConjunct;
-   private demo MusicPlayer = new demo();
    
    // supporting options lists for each of the checkbox group
    private String[] keySignatureList = {"C","F","G","D","A","E"};
@@ -104,14 +103,6 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       else {
          System.out.println("Request denied.");
       }
-      /*if(chkDisjunct.getState()) {
-         System.out.println("Disjunct is selected.");
-         MusicPlayer.playMelody(chkDisjunct.getState());
-      }
-      else {
-         System.out.println("Disjunct is not selected.");
-         MusicPlayer.playMelody(chkDisjunct.getState());
-      }*/
    }
    
    public void setCheckboxGroup(CheckboxGroup g, String[] arr, int x, int y, int w, int h ) {
