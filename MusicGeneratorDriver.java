@@ -24,17 +24,18 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
    
    
    public MusicGeneratorDriver() {
-	   
-	   // add the default window(frame) closing method
-	   addWindowListener(new WindowAdapter() {
-		   public void windowClosing(WindowEvent e) {
-			   dispose();
-		   }
-	   });
-	  
+      
+      // add the default window(frame) closing method
+      addWindowListener(
+         new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+               dispose();
+            }
+         });
+     
       //setLayout(new FlowLayout());
       
-	   // create generate button
+      // create generate button
       generateButton = new Button("Generate");
       generateButton.setBounds(40,60,100,50);
       add(generateButton);
@@ -106,13 +107,13 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
    }
    
    public void setCheckboxGroup(CheckboxGroup g, String[] arr, int x, int y, int w, int h ) {
-	   
-	   for(int i=0;i<arr.length;i++) {
-		   Checkbox c = new Checkbox(arr[i], g, false);
-		   c.setBounds(x, (y+i*h), w, h);
-		   this.add(c);
-		   
-	   }
+      
+      for(int i=0;i<arr.length;i++) {
+         Checkbox c = new Checkbox(arr[i], g, false);
+         c.setBounds(x, (y+i*h), w, h);
+         this.add(c);
+         
+      }
    }
    
    // Uses the current configuration of the UI to create the UIRequest object.
@@ -123,48 +124,68 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       
       // Key
       UIEnums.Key key;
-      switch(keySignature.getSelectedCheckbox().getLabel()) {
-         case "C": key = UIEnums.Key.C;
-         case "F": key = UIEnums.Key.F;
-         case "G": key = UIEnums.Key.G;
-         case "D": key = UIEnums.Key.D;
-         case "A": key = UIEnums.Key.A;
-         case "E": key = UIEnums.Key.E;
-         default: key = UIEnums.Key.C;
+      if(keySignature.getSelectedCheckbox() == null) {
+         key = UIEnums.Key.C;
+      }
+      else {
+         switch(keySignature.getSelectedCheckbox().getLabel()) {
+            case "C": key = UIEnums.Key.C;
+            case "F": key = UIEnums.Key.F;
+            case "G": key = UIEnums.Key.G;
+            case "D": key = UIEnums.Key.D;
+            case "A": key = UIEnums.Key.A;
+            case "E": key = UIEnums.Key.E;
+            default: key = UIEnums.Key.C;
+         }
       }
       
       // Key Signature
       UIEnums.KeySignature keysig;
-      switch(timeSignature.getSelectedCheckbox().getLabel()) {
-         case "4,4": keysig = UIEnums.KeySignature.FOURFOUR;
-         case "2,2": keysig = UIEnums.KeySignature.TWOTWO;
-         case "2,4": keysig = UIEnums.KeySignature.TWOFOUR;
-         case "3,4": keysig = UIEnums.KeySignature.THREEFOUR;
-         case "3,8": keysig = UIEnums.KeySignature.THREEEIGHT;
-         default: keysig = UIEnums.KeySignature.FOURFOUR;
+      if(keySignature.getSelectedCheckbox() == null) {
+         keysig = UIEnums.KeySignature.FOURFOUR;
+      }
+      else {
+         switch(timeSignature.getSelectedCheckbox().getLabel()) {
+            case "4,4": keysig = UIEnums.KeySignature.FOURFOUR;
+            case "2,2": keysig = UIEnums.KeySignature.TWOTWO;
+            case "2,4": keysig = UIEnums.KeySignature.TWOFOUR;
+            case "3,4": keysig = UIEnums.KeySignature.THREEFOUR;
+            case "3,8": keysig = UIEnums.KeySignature.THREEEIGHT;
+            default: keysig = UIEnums.KeySignature.FOURFOUR;
+         }
       }
       
       // Tempo
       UIEnums.Tempo tem;
-      switch(tempo.getSelectedCheckbox().getLabel()) {
-         case "Grave": tem = UIEnums.Tempo.GRAVE;
-         case "Largo": tem = UIEnums.Tempo.LARGO;
-         case "Lento": tem = UIEnums.Tempo.LENTO;
-         case "Adagio": tem = UIEnums.Tempo.ADAGIO;
-         case "Andante": tem = UIEnums.Tempo.ANDANTE;
-         default: tem = UIEnums.Tempo.ANDANTE;
+      if(tempo.getSelectedCheckbox() == null) {
+         tem = UIEnums.Tempo.ANDANTE;
+      }
+      else {
+         switch(tempo.getSelectedCheckbox().getLabel()) {
+            case "Grave": tem = UIEnums.Tempo.GRAVE;
+            case "Largo": tem = UIEnums.Tempo.LARGO;
+            case "Lento": tem = UIEnums.Tempo.LENTO;
+            case "Adagio": tem = UIEnums.Tempo.ADAGIO;
+            case "Andante": tem = UIEnums.Tempo.ANDANTE;
+            default: tem = UIEnums.Tempo.ANDANTE;
+         }
       }
       
       // Emotion
       UIEnums.Emotion emote;
-      switch(emotions.getSelectedCheckbox().getLabel()) {
-         case "Joy": emote = UIEnums.Emotion.JOY;
-         case "Excitement": emote = UIEnums.Emotion.EXCITEMENT;
-         case "Surprise": emote = UIEnums.Emotion.SURPRISE;
-         case "Sadness": emote = UIEnums.Emotion.SADNESS;
-         case "Depress": emote = UIEnums.Emotion.DEPRESS;
-         case "Cure": emote = UIEnums.Emotion.CURE;
-         default: emote = UIEnums.Emotion.JOY;
+      if(emotions.getSelectedCheckbox() == null) {
+         emote = UIEnums.Emotion.JOY;
+      }
+      else {
+         switch(emotions.getSelectedCheckbox().getLabel()) {
+            case "Joy": emote = UIEnums.Emotion.JOY;
+            case "Excitement": emote = UIEnums.Emotion.EXCITEMENT;
+            case "Surprise": emote = UIEnums.Emotion.SURPRISE;
+            case "Sadness": emote = UIEnums.Emotion.SADNESS;
+            case "Depress": emote = UIEnums.Emotion.DEPRESS;
+            case "Cure": emote = UIEnums.Emotion.CURE;
+            default: emote = UIEnums.Emotion.JOY;
+         }
       }
       
       // Create UIRequest object with the enums.
