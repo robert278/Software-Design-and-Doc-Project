@@ -3,7 +3,11 @@ import java.awt.event.*;
 import java.util.*;
 
 public class demo_driver extends Frame implements ActionListener {
-   private Button generateButton;
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private Button generateButton;
    private Button exitButton;
    // check box groups
    private CheckboxGroup keySignature, timeSignature, instruments, tempo, durationofPiece, emotions, melodyType;
