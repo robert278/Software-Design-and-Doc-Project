@@ -43,11 +43,12 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       
       // create exit button
       exitButton = new Button("Exit");
-      exitButton.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            System.exit(0);
-         }
-      });
+      exitButton.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               System.exit(0);
+            }
+         });
       exitButton.setBounds(750, 380, 100, 50);
       //todo using selectionListener to exit the shell
       add(exitButton);
@@ -202,4 +203,3 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       MusicGeneratorDriver app = new MusicGeneratorDriver();
    }
 }
-
