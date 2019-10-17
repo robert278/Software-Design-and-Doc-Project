@@ -1,11 +1,34 @@
+/*
+
+  __  __      _           _       
+ |  \/  |    | |         | |      
+ | \  / | ___| | ___   __| |_   _ 
+ | |\/| |/ _ \ |/ _ \ / _` | | | |
+ | |  | |  __/ | (_) | (_| | |_| |
+ |_|  |_|\___|_|\___/ \__,_|\__, |
+                             __/ |
+                            |___/ 
+This is an implementation of the pattern rule set interface, and is one of the 
+pattern sets which is used to create songs. This pattern that this file is
+implementing is the simple melody, which just creates a conjunct melody with the
+following rules:
+
+TODO: Fill in rules.
+
+*/
+
 import java.util.Random;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
 class melody implements PatternRuleSet {
    
+   // Constructor for melody.
    public melody() { /* do nothing... */ }
    
+   
+   // Returns a single pattern which contains 8 4/4 measures, all of which follow the
+   // rules listed above. 
    public Pattern generatePattern() {
       int duration = 32;
       int i=0;
