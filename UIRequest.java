@@ -14,14 +14,16 @@
 public class UIRequest {
    
    private UIEnums.RequestType request;
+   private UIEnums.PatternType pattern;
    private UIEnums.Key key;
    private UIEnums.KeySignature keysig;
    private UIEnums.Tempo tempo;
    private UIEnums.Emotion emotion;
    
    // Regular constructor, to be used by UI
-   public UIRequest(UIEnums.RequestType r, UIEnums.Key k, UIEnums.KeySignature ks, UIEnums.Tempo t, UIEnums.Emotion e) {
+   public UIRequest(UIEnums.RequestType r, UIEnums.PatternType p, UIEnums.Key k, UIEnums.KeySignature ks, UIEnums.Tempo t, UIEnums.Emotion e) {
       request = r;
+      pattern = p;
       key = k;
       keysig = ks;
       tempo = t;
@@ -52,5 +54,7 @@ public class UIRequest {
    public UIEnums.Emotion GetEmotion() {
       return emotion;
    }
-   
+   public UIEnums.PatternType GetPattern() {
+      return pattern;
+   }
 }

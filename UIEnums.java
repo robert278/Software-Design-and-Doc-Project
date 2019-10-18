@@ -2,6 +2,9 @@ public class UIEnums {
    public enum RequestType {
       GENERATE, STOP, SAVE;
    }
+   public enum PatternType {
+      NONE, CONJUNCTMELODY, MELODYCHORDS;
+   }
    public enum Key {
       C, CSHARP, D, DSHARP, E, F, FSHARP, G, GSHARP, A, ASHARP, B;
    }
