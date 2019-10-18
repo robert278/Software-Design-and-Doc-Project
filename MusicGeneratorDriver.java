@@ -38,7 +38,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class DriverJFrame extends JFrame {
+public class MusicGeneratorDriver extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -59,7 +59,7 @@ public class DriverJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DriverJFrame frame = new DriverJFrame();
+					MusicGeneratorDriver frame = new MusicGeneratorDriver();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +71,7 @@ public class DriverJFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DriverJFrame() {
+	public MusicGeneratorDriver() {
 		setFont(new Font("Myanmar Text", Font.BOLD, 13));
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Anbang Wang\\Desktop\\SDD_MusicGenerator_Image\\RMG_Icon.png"));
 		setTitle("RandomMusicGenerator");
