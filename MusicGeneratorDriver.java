@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -43,7 +42,7 @@ public class MusicGeneratorDriver extends JFrame {
 
    private JPanel contentPane;
    private final ButtonGroup buttonGroup = new ButtonGroup();
-   private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+   private final ButtonGroup keySignature = new ButtonGroup();
    private final ButtonGroup buttonGroup_2 = new ButtonGroup();
    private final ButtonGroup buttonGroup_3 = new ButtonGroup();
    private final ButtonGroup buttonGroup_4 = new ButtonGroup();
@@ -124,8 +123,8 @@ public class MusicGeneratorDriver extends JFrame {
             public void actionPerformed(ActionEvent e) {
 				// Area for generate.
 				System.out.println("Generate pressed.");
-				UIRequest gen = createGenerateRequest();
-				Interface.acceptRequest(gen);
+				//UIRequest gen = createGenerateRequest();
+				//Interface.acceptRequest(gen);
 			}
          }
          );   
@@ -232,7 +231,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(lblNewLabel_2, "2, 2");
    	
       JRadioButton radioButton_5 = new JRadioButton("");
-      buttonGroup_1.add(radioButton_5);
+      keySignature.add(radioButton_5);
       panel_1.add(radioButton_5, "4, 2");
    	
       JLabel label = new JLabel("(2,2)");
@@ -240,7 +239,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label, "2, 4");
    	
       JRadioButton radioButton_6 = new JRadioButton("");
-      buttonGroup_1.add(radioButton_6);
+      keySignature.add(radioButton_6);
       panel_1.add(radioButton_6, "4, 4");
    	
       JLabel label_1 = new JLabel("(2,4)");
@@ -248,7 +247,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label_1, "2, 6");
    	
       JRadioButton radioButton_7 = new JRadioButton("");
-      buttonGroup_1.add(radioButton_7);
+      keySignature.add(radioButton_7);
       panel_1.add(radioButton_7, "4, 6");
    	
       JLabel label_2 = new JLabel("(3,4)");
@@ -256,7 +255,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label_2, "2, 8");
    	
       JRadioButton radioButton_8 = new JRadioButton("");
-      buttonGroup_1.add(radioButton_8);
+      keySignature.add(radioButton_8);
       panel_1.add(radioButton_8, "4, 8");
    	
       JLabel label_3 = new JLabel("(3,8)");
@@ -264,7 +263,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label_3, "2, 10");
    	
       JRadioButton radioButton_9 = new JRadioButton("");
-      buttonGroup_1.add(radioButton_9);
+      keySignature.add(radioButton_9);
       panel_1.add(radioButton_9, "4, 10");
    	
       JPanel panel_2 = new JPanel();
@@ -536,7 +535,7 @@ public class MusicGeneratorDriver extends JFrame {
    }
    
    // Uses the current configuration of the UI to create the UIRequest object.
-   public UIRequest createGenerateRequest() {
+   /*public UIRequest createGenerateRequest() {
       // Need request type, key, key signature, tempo, emotion
       // Request
       UIEnums.RequestType req = UIEnums.RequestType.GENERATE;
@@ -610,5 +609,5 @@ public class MusicGeneratorDriver extends JFrame {
       // Create UIRequest object with the enums.
       UIRequest thisRequest = new UIRequest(req, key, keysig, tem, emote);
       return thisRequest;
-   }
+   }*/
 }
