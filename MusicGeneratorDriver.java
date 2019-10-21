@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -46,6 +47,10 @@ public class MusicGeneratorDriver extends JFrame {
    private final ButtonGroup buttonGroup_2 = new ButtonGroup();
    private final ButtonGroup buttonGroup_3 = new ButtonGroup();
    private final ButtonGroup buttonGroup_4 = new ButtonGroup();
+   
+    // Used for talking to the music generation
+	private UIAlgorithmBridge Interface = new UIAlgorithmBridge();
+
 
 	/**
 	 * Launch the application.
@@ -103,7 +108,7 @@ public class MusicGeneratorDriver extends JFrame {
          new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                // Replace this with what should be called when save is hit.
-               System.out.println("Did I hit the generate button?");
+               System.out.println("Save button pressed (non-functional at the moment)");
             }
          }
          );
@@ -117,9 +122,11 @@ public class MusicGeneratorDriver extends JFrame {
       btnGenerate.addActionListener(
          new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-               // Replace this with what should be called when generate is hit.
-               System.out.println("Did I hit the generate button?");
-            }
+				// Area for generate.
+				System.out.println("Generate pressed.");
+				UIRequest gen = createGenerateRequest();
+				Interface.acceptRequest(gen);
+			}
          }
          );   
       btnGenerate.setBounds(70, 440, 200, 70);
@@ -526,5 +533,82 @@ public class MusicGeneratorDriver extends JFrame {
       lblNewLabel_7.setFont(new Font("Times New Roman", Font.BOLD, 35));
       lblNewLabel_7.setBounds(70, 26, 601, 87);
       contentPane.add(lblNewLabel_7);
+   }
+   
+   // Uses the current configuration of the UI to create the UIRequest object.
+   public UIRequest createGenerateRequest() {
+      // Need request type, key, key signature, tempo, emotion
+      // Request
+      UIEnums.RequestType req = UIEnums.RequestType.GENERATE;
+      
+      // Key
+      UIEnums.Key key;
+      if(keySignature.getSelectedCheckbox() == null) {
+         key = UIEnums.Key.C;
+      }
+      else {
+         switch(keySignature.getSelectedCheckbox().getLabel()) {
+            case "C": key = UIEnums.Key.C;
+            case "F": key = UIEnums.Key.F;
+            case "G": key = UIEnums.Key.G;
+            case "D": key = UIEnums.Key.D;
+            case "A": key = UIEnums.Key.A;
+            case "E": key = UIEnums.Key.E;
+            default: key = UIEnums.Key.C;
+         }
+      }
+      
+      // Key Signature
+      UIEnums.KeySignature keysig;
+      if(keySignature.getSelectedCheckbox() == null) {
+         keysig = UIEnums.KeySignature.FOURFOUR;
+      }
+      else {
+         switch(timeSignature.getSelectedCheckbox().getLabel()) {
+            case "4,4": keysig = UIEnums.KeySignature.FOURFOUR;
+            case "2,2": keysig = UIEnums.KeySignature.TWOTWO;
+            case "2,4": keysig = UIEnums.KeySignature.TWOFOUR;
+            case "3,4": keysig = UIEnums.KeySignature.THREEFOUR;
+            case "3,8": keysig = UIEnums.KeySignature.THREEEIGHT;
+            default: keysig = UIEnums.KeySignature.FOURFOUR;
+         }
+      }
+      
+      // Tempo
+      UIEnums.Tempo tem;
+      if(tempo.getSelectedCheckbox() == null) {
+         tem = UIEnums.Tempo.ANDANTE;
+      }
+      else {
+         switch(tempo.getSelectedCheckbox().getLabel()) {
+            case "Grave": tem = UIEnums.Tempo.GRAVE;
+            case "Largo": tem = UIEnums.Tempo.LARGO;
+            case "Lento": tem = UIEnums.Tempo.LENTO;
+            case "Adagio": tem = UIEnums.Tempo.ADAGIO;
+            case "Andante": tem = UIEnums.Tempo.ANDANTE;
+            default: tem = UIEnums.Tempo.ANDANTE;
+         }
+      }
+      
+      // Emotion
+      UIEnums.Emotion emote;
+      if(emotions.getSelectedCheckbox() == null) {
+         emote = UIEnums.Emotion.JOY;
+      }
+      else {
+         switch(emotions.getSelectedCheckbox().getLabel()) {
+            case "Joy": emote = UIEnums.Emotion.JOY;
+            case "Excitement": emote = UIEnums.Emotion.EXCITEMENT;
+            case "Surprise": emote = UIEnums.Emotion.SURPRISE;
+            case "Sadness": emote = UIEnums.Emotion.SADNESS;
+            case "Depress": emote = UIEnums.Emotion.DEPRESS;
+            case "Cure": emote = UIEnums.Emotion.CURE;
+            default: emote = UIEnums.Emotion.JOY;
+         }
+      }
+      
+      // Create UIRequest object with the enums.
+      UIRequest thisRequest = new UIRequest(req, key, keysig, tem, emote);
+      return thisRequest;
    }
 }
