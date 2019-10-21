@@ -1,3 +1,19 @@
+/*
+   _____                   
+  / ____|                  
+ | (___   ___  _ __   __ _ 
+  \___ \ / _ \| '_ \ / _` |
+  ____) | (_) | | | | (_| |
+ |_____/ \___/|_| |_|\__, |
+                      __/ |
+                     |___/ 
+A class which creates a single song, which can be passed to a player and played.
+Accepts patterns from various pattern generators, the rulesets, and stitches them
+together using certain rules. 
+
+These rules are defined as:
+1. Concatenate all patterns together.
+*/
 import java.util.ArrayList;
 import org.jfugue.pattern.Pattern;
 

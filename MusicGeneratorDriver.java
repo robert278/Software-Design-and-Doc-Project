@@ -1,3 +1,16 @@
+/*
+
+  __  __           _       _____                           _             _____       _                
+ |  \/  |         (_)     / ____|                         | |           |  __ \     (_)               
+ | \  / |_   _ ___ _  ___| |  __  ___ _ __   ___ _ __ __ _| |_ ___  _ __| |  | |_ __ ___   _____ _ __ 
+ | |\/| | | | / __| |/ __| | |_ |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__| |  | | '__| \ \ / / _ \ '__|
+ | |  | | |_| \__ \ | (__| |__| |  __/ | | |  __/ | | (_| | || (_) | |  | |__| | |  | |\ V /  __/ |   
+ |_|  |_|\__,_|___/_|\___|\_____|\___|_| |_|\___|_|  \__,_|\__\___/|_|  |_____/|_|  |_| \_/ \___|_|   
+                                                                                                     
+This file is used to run the UI, and is the entry point for the entire program.                                                                                                   
+
+*/
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -22,7 +35,7 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
    
    
    
-   
+   // Constructor for the driver, which contains most of the functionality for the UI.
    public MusicGeneratorDriver() {
       
       // add the default window(frame) closing method
