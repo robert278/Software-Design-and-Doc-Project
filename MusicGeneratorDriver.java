@@ -43,14 +43,20 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       
       // create exit button
       exitButton = new Button("Exit");
+      exitButton.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               System.exit(0);
+            }
+         });
       exitButton.setBounds(750, 380, 100, 50);
       //todo using selectionListener to exit the shell
       add(exitButton);
       
       melodyType = new CheckboxGroup();
-      chkDisjunct = new Checkbox("Disjunct", false, melodyType);
+      chkDisjunct = new Checkbox("Melody", false, melodyType);
       chkDisjunct.setBounds(250, 80, 80, 30);
-      chkConjunct = new Checkbox("Conjunct", false, melodyType);
+      chkConjunct = new Checkbox("Melody+", false, melodyType);
       chkConjunct.setBounds(350, 80, 80, 30);
       add(chkDisjunct);
       add(chkConjunct);
@@ -122,6 +128,19 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       // Request
       UIEnums.RequestType req = UIEnums.RequestType.GENERATE;
       
+      // Pattern type
+      UIEnums.PatternType pat;
+      if(melodyType.getSelectedCheckbox() == null) {
+         pat = UIEnums.PatternType.CONJUNCTMELODY;
+      }
+      else {
+         switch(melodyType.getSelectedCheckbox().getLabel()) {
+            case "Melody": pat = UIEnums.PatternType.CONJUNCTMELODY;
+            case "Melody+": pat = UIEnums.PatternType.MELODYCHORDS;
+            default: pat = UIEnums.PatternType.MELODYCHORDS;
+         }
+      }
+      
       // Key
       UIEnums.Key key;
       if(keySignature.getSelectedCheckbox() == null) {
@@ -189,7 +208,7 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       }
       
       // Create UIRequest object with the enums.
-      UIRequest thisRequest = new UIRequest(req, key, keysig, tem, emote);
+      UIRequest thisRequest = new UIRequest(req, pat, key, keysig, tem, emote);
       return thisRequest;
    }
    

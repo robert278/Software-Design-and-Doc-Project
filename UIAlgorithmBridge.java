@@ -35,12 +35,23 @@ public class UIAlgorithmBridge {
          // OurPlayer.save()?
       }
       if(request.GetRequestType() == UIEnums.RequestType.GENERATE) {
-         // Get the patterns for the request
-         melody melodyGenerator = new melody();
+         // Check the pattern type
          ArrayList<Pattern> patterns = new ArrayList<Pattern>();
-         for(int i = 0; i < 5; i++) {
-            patterns.add(melodyGenerator.generatePattern());
+         if(request.GetPattern() == UIEnums.PatternType.CONJUNCTMELODY) {
+            // Use the melody.java ruleset.
+            melody melodyGenerator = new melody();
+            // Create patterns
+            for(int i = 0; i < 5; i++)
+               patterns.add(melodyGenerator.generatePattern());
          }
+         else if(request.GetPattern() == UIEnums.PatternType.MELODYCHORDS) {
+            // Use the ChordMelodyPattern.java ruleset.
+            ChordMelodyPattern melChordGen = new ChordMelodyPattern();
+            // Create patterns
+            for(int i = 0; i < 5; i++)
+               patterns.add(melChordGen.generatePattern());
+         }
+         
          // Send created patterns to the pattern bank (is this necessary?)
          
          // Have the song accept the patterns
