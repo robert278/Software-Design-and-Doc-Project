@@ -41,11 +41,11 @@ import javax.swing.SwingConstants;
 public class MusicGeneratorDriver extends JFrame {
 
    private JPanel contentPane;
-   private final ButtonGroup buttonGroup = new ButtonGroup();
    private final ButtonGroup keySignature = new ButtonGroup();
-   private final ButtonGroup buttonGroup_2 = new ButtonGroup();
-   private final ButtonGroup buttonGroup_3 = new ButtonGroup();
-   private final ButtonGroup buttonGroup_4 = new ButtonGroup();
+   private final ButtonGroup timeSignature = new ButtonGroup();
+   private final ButtonGroup instruments = new ButtonGroup();
+   private final ButtonGroup tempo = new ButtonGroup();
+   private final ButtonGroup emotion = new ButtonGroup();
    
     // Used for talking to the music generation
 	private UIAlgorithmBridge Interface = new UIAlgorithmBridge();
@@ -162,7 +162,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel.add(lblNewLabel, "2, 2");
    	
       JRadioButton rdbtnNewRadioButton = new JRadioButton("");
-      buttonGroup.add(rdbtnNewRadioButton);
+      keySignature.add(rdbtnNewRadioButton);
       panel.add(rdbtnNewRadioButton, "4, 2");
    	
       JLabel lblNewLabel_1 = new JLabel("F");
@@ -170,7 +170,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel.add(lblNewLabel_1, "2, 4");
    	
       JRadioButton radioButton = new JRadioButton("");
-      buttonGroup.add(radioButton);
+      keySignature.add(radioButton);
       panel.add(radioButton, "4, 4");
    	
       JLabel lblG = new JLabel("G");
@@ -178,7 +178,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel.add(lblG, "2, 6");
    	
       JRadioButton radioButton_1 = new JRadioButton("");
-      buttonGroup.add(radioButton_1);
+      keySignature.add(radioButton_1);
       panel.add(radioButton_1, "4, 6");
    	
       JLabel lblD = new JLabel("D");
@@ -186,7 +186,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel.add(lblD, "2, 8");
    	
       JRadioButton radioButton_2 = new JRadioButton("");
-      buttonGroup.add(radioButton_2);
+      keySignature.add(radioButton_2);
       panel.add(radioButton_2, "4, 8");
    	
       JLabel lblA = new JLabel("A");
@@ -194,7 +194,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel.add(lblA, "2, 10");
    	
       JRadioButton radioButton_3 = new JRadioButton("");
-      buttonGroup.add(radioButton_3);
+      keySignature.add(radioButton_3);
       panel.add(radioButton_3, "4, 10");
    	
       JLabel lblE = new JLabel("E");
@@ -202,7 +202,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel.add(lblE, "2, 12");
    	
       JRadioButton radioButton_4 = new JRadioButton("");
-      buttonGroup.add(radioButton_4);
+      keySignature.add(radioButton_4);
       panel.add(radioButton_4, "4, 12");
    	
       JPanel panel_1 = new JPanel();
@@ -231,7 +231,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(lblNewLabel_2, "2, 2");
    	
       JRadioButton radioButton_5 = new JRadioButton("");
-      keySignature.add(radioButton_5);
+      timeSignature.add(radioButton_5);
       panel_1.add(radioButton_5, "4, 2");
    	
       JLabel label = new JLabel("(2,2)");
@@ -239,7 +239,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label, "2, 4");
    	
       JRadioButton radioButton_6 = new JRadioButton("");
-      keySignature.add(radioButton_6);
+      timeSignature.add(radioButton_6);
       panel_1.add(radioButton_6, "4, 4");
    	
       JLabel label_1 = new JLabel("(2,4)");
@@ -247,7 +247,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label_1, "2, 6");
    	
       JRadioButton radioButton_7 = new JRadioButton("");
-      keySignature.add(radioButton_7);
+      timeSignature.add(radioButton_7);
       panel_1.add(radioButton_7, "4, 6");
    	
       JLabel label_2 = new JLabel("(3,4)");
@@ -255,7 +255,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label_2, "2, 8");
    	
       JRadioButton radioButton_8 = new JRadioButton("");
-      keySignature.add(radioButton_8);
+      timeSignature.add(radioButton_8);
       panel_1.add(radioButton_8, "4, 8");
    	
       JLabel label_3 = new JLabel("(3,8)");
@@ -263,7 +263,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_1.add(label_3, "2, 10");
    	
       JRadioButton radioButton_9 = new JRadioButton("");
-      keySignature.add(radioButton_9);
+      timeSignature.add(radioButton_9);
       panel_1.add(radioButton_9, "4, 10");
    	
       JPanel panel_2 = new JPanel();
@@ -294,7 +294,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_2.add(lblNewLabel_3, "2, 2");
    	
       JRadioButton radioButton_10 = new JRadioButton("");
-      buttonGroup_2.add(radioButton_10);
+      instruments.add(radioButton_10);
       panel_2.add(radioButton_10, "4, 2");
    	
       JLabel lblPiano = new JLabel("Piano");
@@ -302,7 +302,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_2.add(lblPiano, "2, 4");
    	
       JRadioButton radioButton_11 = new JRadioButton("");
-      buttonGroup_2.add(radioButton_11);
+      instruments.add(radioButton_11);
       panel_2.add(radioButton_11, "4, 4");
    	
       JLabel lblGuitar = new JLabel("Guitar");
@@ -310,7 +310,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_2.add(lblGuitar, "2, 6");
    	
       JRadioButton radioButton_12 = new JRadioButton("");
-      buttonGroup_2.add(radioButton_12);
+      instruments.add(radioButton_12);
       panel_2.add(radioButton_12, "4, 6");
    	
       JLabel lblViolin = new JLabel("Violin");
@@ -318,7 +318,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_2.add(lblViolin, "2, 8");
    	
       JRadioButton radioButton_13 = new JRadioButton("");
-      buttonGroup_2.add(radioButton_13);
+      instruments.add(radioButton_13);
       panel_2.add(radioButton_13, "4, 8");
    	
       JLabel lblTrumpet = new JLabel("Trumpet");
@@ -326,7 +326,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_2.add(lblTrumpet, "2, 10");
    	
       JRadioButton radioButton_14 = new JRadioButton("");
-      buttonGroup_2.add(radioButton_14);
+      instruments.add(radioButton_14);
       panel_2.add(radioButton_14, "4, 10");
    	
       JLabel lblHarp = new JLabel("Harp");
@@ -334,7 +334,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_2.add(lblHarp, "2, 12");
    	
       JRadioButton radioButton_15 = new JRadioButton("");
-      buttonGroup_2.add(radioButton_15);
+      instruments.add(radioButton_15);
       panel_2.add(radioButton_15, "4, 12");
    	
       JPanel panel_3 = new JPanel();
@@ -373,7 +373,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_3.add(lblNewLabel_4, "2, 2");
    	
       JRadioButton radioButton_16 = new JRadioButton("");
-      buttonGroup_3.add(radioButton_16);
+      tempo.add(radioButton_16);
       panel_3.add(radioButton_16, "4, 2");
    	
       JLabel lblLargo = new JLabel("Larghetto 50 BPM");
@@ -381,7 +381,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_3.add(lblLargo, "2, 4");
    	
       JRadioButton radioButton_17 = new JRadioButton("");
-      buttonGroup_3.add(radioButton_17);
+      tempo.add(radioButton_17);
       panel_3.add(radioButton_17, "4, 4");
    	
       JLabel lblLento = new JLabel("Adagio 60 BPM");
@@ -389,7 +389,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_3.add(lblLento, "2, 6");
    	
       JRadioButton radioButton_18 = new JRadioButton("");
-      buttonGroup_3.add(radioButton_18);
+      tempo.add(radioButton_18);
       panel_3.add(radioButton_18, "4, 6");
    	
       JLabel lblAdagio = new JLabel("Andantte 70 BPM");
@@ -397,7 +397,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_3.add(lblAdagio, "2, 8");
    	
       JRadioButton radioButton_19 = new JRadioButton("");
-      buttonGroup_3.add(radioButton_19);
+      tempo.add(radioButton_19);
       panel_3.add(radioButton_19, "4, 8");
    	
       JLabel lblAndante = new JLabel("Andantino 80 BPM");
@@ -405,7 +405,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_3.add(lblAndante, "2, 10");
    	
       JRadioButton radioButton_20 = new JRadioButton("");
-      buttonGroup_3.add(radioButton_20);
+      tempo.add(radioButton_20);
       panel_3.add(radioButton_20, "4, 10");
    	
       JLabel lblModeratoBpm = new JLabel("Moderato 95 BPM");
@@ -471,7 +471,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_4.add(lblNewLabel_5, "2, 2");
    	
       JRadioButton radioButton_21 = new JRadioButton("");
-      buttonGroup_4.add(radioButton_21);
+      emotion.add(radioButton_21);
       panel_4.add(radioButton_21, "4, 2");
    	
       JLabel lblExcitement = new JLabel("Excitement");
@@ -479,7 +479,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_4.add(lblExcitement, "2, 4");
    	
       JRadioButton radioButton_22 = new JRadioButton("");
-      buttonGroup_4.add(radioButton_22);
+      emotion.add(radioButton_22);
       panel_4.add(radioButton_22, "4, 4");
    	
       JLabel lblSurprise = new JLabel("Surprise");
@@ -487,7 +487,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_4.add(lblSurprise, "2, 6");
    	
       JRadioButton radioButton_23 = new JRadioButton("");
-      buttonGroup_4.add(radioButton_23);
+      emotion.add(radioButton_23);
       panel_4.add(radioButton_23, "4, 6");
    	
       JLabel lblSadness = new JLabel("Sadness");
@@ -495,7 +495,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_4.add(lblSadness, "2, 8");
    	
       JRadioButton radioButton_24 = new JRadioButton("");
-      buttonGroup_4.add(radioButton_24);
+      emotion.add(radioButton_24);
       panel_4.add(radioButton_24, "4, 8");
    	
       JLabel lblDepress = new JLabel("Depress");
@@ -503,7 +503,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_4.add(lblDepress, "2, 10");
    	
       JRadioButton radioButton_25 = new JRadioButton("");
-      buttonGroup_4.add(radioButton_25);
+      emotion.add(radioButton_25);
       panel_4.add(radioButton_25, "4, 10");
    	
       JLabel lblCure = new JLabel("Cure");
@@ -511,7 +511,7 @@ public class MusicGeneratorDriver extends JFrame {
       panel_4.add(lblCure, "2, 12");
    	
       JRadioButton radioButton_26 = new JRadioButton("");
-      buttonGroup_4.add(radioButton_26);
+      emotion.add(radioButton_26);
       panel_4.add(radioButton_26, "4, 12");
    	
       JComboBox comboBox = new JComboBox();
