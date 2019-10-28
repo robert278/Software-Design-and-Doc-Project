@@ -21,7 +21,7 @@ public class PercussiveTempoAndVolumeDemo {
         	toPlay = toPlay + "Cqa" + randomInteger + "d64 ";
         }
         player.play(rhythm.getPattern()); //WHY IF YOU DON'T COMMENT THIS LINE OUT THE BELOW LINE IS A PERCUSSION?
-    	player.play(toPlay);
+    	player.play(toPlay); //WITH The above line, this plays a bongo-like drum, without the above line, it plays the default piano -- why is this...
     	//The pattern class has a .setTempo(value) method
     //new Player().play(rhythm.getPattern().repeat(2));
     }
