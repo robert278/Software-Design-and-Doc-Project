@@ -45,11 +45,22 @@ public class UIAlgorithmBridge {
                patterns.add(melodyGenerator.generatePattern());
          }
          else if(request.GetPattern() == UIEnums.PatternType.MELODYCHORDS) {
-            // Use the ChordMelodyPattern.java ruleset.
-            ChordMelodyPattern melChordGen = new ChordMelodyPattern();
+            // Use a specific emotional pattern
+			// Check if "Joy" or "Saddness"
+			
+			// Sadness: Use the ChordMelodyPattern.java ruleset.
+			if(request.GetEmotion() == UIEnums.Emotion.SADNESS) {
+				ChordMelodyPattern patternGen = new ChordMelodyPattern();
             // Create patterns
-            for(int i = 0; i < 5; i++)
-               patterns.add(melChordGen.generatePattern());
+				for(int i = 0; i < 5; i++)
+					patterns.add(patternGen.generatePattern());
+			}
+			else /*if(request.GetEmotion() == UIEnums.Emotion.JOY)*/ {
+				HappyPattern patternGen = new HappyPattern();
+				// Create patterns
+				for(int i = 0; i < 5; i++)
+					patterns.add(patternGen.generatePattern());
+			}
          }
          
          // Send created patterns to the pattern bank (is this necessary?)
@@ -57,6 +68,7 @@ public class UIAlgorithmBridge {
          // Have the song accept the patterns
          Song thisSong = new Song();
          thisSong.AcceptPatterns(patterns);
+		   //patterns.clear();
          
          // Send the completed song to the player
          OurPlayer thisPlayer = new OurPlayer();
