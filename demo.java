@@ -465,7 +465,6 @@ public class demo {
       //rarely includes the fifths in chords, almost always just do the 3rd and the root
       
       
-      //How do you 'hold' one chord for 2 beats while playing two melody notes of 1 beat?
       //Why does the last note played end 'abruptly' for example [C D E F] the F is about half the beat of the others 
       }
     
