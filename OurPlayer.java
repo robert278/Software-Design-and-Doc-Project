@@ -34,11 +34,11 @@ public class OurPlayer {
    // Sets a song to be the current song, and then plays the song.
    public void playSong(Song s) {
       currSong = s;
-      jfplayer.play(s.GetSong());
+      jfplayer.play(s.toString());
    }
    // Save the current song
    public void saveSong() {
-      Pattern p = new Pattern(currSong.GetSong());
+      Pattern p = new Pattern(currSong.toString());
       try {
          MidiFileManager.savePatternToMidi(p,new File("Song.mid"));
       }

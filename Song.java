@@ -18,33 +18,29 @@ import java.util.ArrayList;
 import org.jfugue.pattern.Pattern;
 
 public class Song {
-   String song; // Formatted as a JFugue string 
+   int tempo;
+   ArrayList<Voice> voices;
 
    public Song() {
-      song = "";
+      voices = new ArrayList<Voice>();
+      tempo = 120;
    }
    
-   public Song(String s) {
-      song = s;
+   public boolean addVoice(Voice v) {
+      voices.add(v);
+      return true;
    }
    
-   public boolean AcceptPatterns(ArrayList<Pattern> patternBank) {
-      String newSong = "";
-      for(int i = 0; i < patternBank.size(); i++) {
-         newSong = newSong + patternBank.get(i);
+   public boolean setTempo(int t) {
+      tempo = t;
+      return true;
+   }
+   
+   public String toString() {
+      String song = "T"+tempo+" ";
+      for(int i = 0; i < voices.size(); i++) {
+         song = song+" V"+i+" "+voices.get(i).toString();
       }
-      if(!newSong.equals("")) {
-         SetSong(newSong);
-         return true;
-      }
-      return false;
-   }
-   
-   private void SetSong(String s) {
-      song = s;
-   }
-   
-   public String GetSong() {
       return song;
    }
 }

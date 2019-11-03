@@ -11,21 +11,12 @@ well as the types of requests that are supported by the bridge.
 */
 public class UIEnums {
    public enum RequestType {
-      GENERATE, STOP, SAVE;
+      GENERATE, EXIT, SAVE;
    }
    public enum PatternType {
-      NONE, CONJUNCTMELODY, MELODYCHORDS;
+      HAPPYCALM, HAPPYINTENSE, SADCALM, SADINTENSE;
    }
-   public enum Key {
-      C, CSHARP, D, DSHARP, E, F, FSHARP, G, GSHARP, A, ASHARP, B;
-   }
-   enum KeySignature {
-      FOURFOUR, TWOTWO, TWOFOUR, THREEFOUR, THREEEIGHT; 
-   }
-   enum Tempo {
-      GRAVE, LARGO, LENTO, ADAGIO, ANDANTE;
-   }
-   enum Emotion {
-      JOY, EXCITEMENT, SURPRISE, SADNESS, DEPRESS, CURE;
+   public enum LeadingInstrument {
+      PIANO, FLUTE, TRUMPET;
    }
 }
