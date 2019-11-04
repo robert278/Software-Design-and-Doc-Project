@@ -471,29 +471,32 @@ public class HappyPattern implements PatternRuleSet {
          Phrase p = new Phrase(a);
          p.addNotes(b);
          p.addNotes(c);
-         p.addNotes(b);
-         p.addNotes(c);
-         p.addNotes(a);
-         phraseLength[i] = measureLength * 2;
+         //p.addNotes(b);
+         //p.addNotes(c);
+         //p.addNotes(a);
+         phraseLength[i] = measureLength; //* 2;
          melodyPhrases[i] = p;
+		 melodyPhrases[i].setVolume(100, 50);
       }
    	// Add phrases to the voice - ABAC pattern
       melody.addPhrase(melodyPhrases[0]);
-      melody.addPhrase(melodyPhrases[1]);
-      melody.addPhrase(melodyPhrases[0]);
-      melody.addPhrase(melodyPhrases[2]);
+      //melody.addPhrase(melodyPhrases[1]);
+      //melody.addPhrase(melodyPhrases[0]);
+      //melody.addPhrase(melodyPhrases[2]);
    	
      
      // Create the chord voice
       song.addVoice(melody);
      
      // Create the chord voice
-      int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
+      //int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
+	  int measuresOfChords = phraseLength[0];
       ArrayList<String> fourMeasures = makeChordNotes(baseProgression);
      // Repeat fourMeasures measuresOfChords times
-      for(int i = 0; i < measuresOfChords; i++) {
+      for(int i = 0; i < measuresOfChords/3; i++) {
          Phrase p = new Phrase();
          p.addNotes(fourMeasures);
+		 //p.setVolume(100, 50);
          chords.addPhrase(p);
       }
      

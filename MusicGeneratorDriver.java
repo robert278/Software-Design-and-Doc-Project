@@ -26,7 +26,7 @@ public class MusicGeneratorDriver extends Frame {
    private CheckboxGroup leadingInstrument, theme, emotion;
    
    // supporting options lists for each of the checkbox group
-   private String[] leadingInstrumentList = {"Piano","Trumpet","Flute"};
+   private String[] leadingInstrumentList = {"Piano","Trumpet","Flute","Guitar","Choir","Strings","Violin"};
    private String[] themeList = {"Calm","Intense"};
    private String[] emotionList = {"Happy","Sad"};
    
@@ -157,8 +157,9 @@ public class MusicGeneratorDriver extends Frame {
       }
       else {
          String l = leadingInstrument.getSelectedCheckbox().getLabel();
-         UIEnums.LeadingInstrument[] leads = {UIEnums.LeadingInstrument.PIANO, UIEnums.LeadingInstrument.FLUTE, UIEnums.LeadingInstrument.TRUMPET};
-         String[] choices2 = {"Piano","Trumpet","Flute"};
+         UIEnums.LeadingInstrument[] leads = {UIEnums.LeadingInstrument.PIANO, UIEnums.LeadingInstrument.FLUTE, UIEnums.LeadingInstrument.TRUMPET, UIEnums.LeadingInstrument.GUITAR,
+		 UIEnums.LeadingInstrument.CHOIR, UIEnums.LeadingInstrument.STRINGS, UIEnums.LeadingInstrument.VIOLIN};
+         String[] choices2 = {"Piano","Trumpet","Flute","Guitar","Choir","Strings","Violin"};
          for(int i = 0; i < leads.length; i++) {
             if(choices2[i].equals(l))
                lead = leads[i];

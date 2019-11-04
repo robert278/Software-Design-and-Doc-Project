@@ -17,6 +17,6 @@ public class UIEnums {
       HAPPYCALM, HAPPYINTENSE, SADCALM, SADINTENSE;
    }
    public enum LeadingInstrument {
-      PIANO, FLUTE, TRUMPET;
+      PIANO, FLUTE, TRUMPET, GUITAR, CHOIR, STRINGS, VIOLIN;
    }
 }

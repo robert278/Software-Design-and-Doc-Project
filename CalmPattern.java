@@ -18,7 +18,13 @@ public class CalmPattern {
 		allowedNotes = an;
 		melody = new Voice(lead);
 		chords = new Voice("Piano");
-		percussion = new Voice("Tubular_Bells");
+		int percussiveDecider = (int)(Math.random()*3);
+		if(percussiveDecider == 0)
+			percussion = new Voice("Tubular_Bells");
+		else if(percussiveDecider == 1)
+			percussion = new Voice("Bass_Lead");
+		else
+			percussion = new Voice("Fifths");
    }
    
    // Enum which contains all the chord types, which can be used to determine chords regardless of key.

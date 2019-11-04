@@ -39,12 +39,12 @@ public class Phrase {
          
       String testNote = notes.get(0);
       
-      if(testNote.indexOf("a") != -1) { // Volume has been set before
+      /*if(testNote.indexOf("a") != -1) { // Volume has been set before -- good idea but no
          // Scrape volumes off the notes
          for(int i = 0; i < notes.size(); i++) {
             notes.set(i, notes.get(i).substring(0, notes.get(i).indexOf("a")));
          }
-      }
+      }*/
       
       // apply the attack and decay volumes
       String volume = "a"+a+"d"+d;

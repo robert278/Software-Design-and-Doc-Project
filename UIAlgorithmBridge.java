@@ -22,6 +22,7 @@ import org.jfugue.pattern.Pattern;
 
 public class UIAlgorithmBridge {
    private UIRequest request;
+   private OurPlayer thisPlayer = new OurPlayer();
    
    public UIAlgorithmBridge() { /* do nothing */  } 
    
@@ -33,15 +34,24 @@ public class UIAlgorithmBridge {
          // ???
       }
       if(request.GetRequestType() == UIEnums.RequestType.SAVE) {
-         // OurPlayer.save()?
+         // Save request.
+		 thisPlayer.saveSong();
       }
       if(request.GetRequestType() == UIEnums.RequestType.GENERATE) {
       // Determine the lead instrument
          String lead;
          if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.FLUTE)
-            lead = "Violin";
+            lead = "Flute";
          else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.TRUMPET)
-            lead = "French_Horn";
+            lead = "Trumpet";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.GUITAR)
+			lead = "Guitar";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.CHOIR)
+			lead = "Choir_Aahs";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.STRINGS)
+			lead = "String_Ensemble_1";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.VIOLIN)
+			lead = "Violin";
          else
             lead = "Piano";
          TempoDecorator t;
@@ -126,7 +136,6 @@ public class UIAlgorithmBridge {
          
          // Send the completed song to the player
          System.out.println(s.toString());
-         OurPlayer thisPlayer = new OurPlayer();
          thisPlayer.playSong(s);
       }
       return true;
