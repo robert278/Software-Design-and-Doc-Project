@@ -23,18 +23,19 @@ import org.jfugue.midi.*;
 
 public class OurPlayer {
 
-   // The jfugue player is responsible for the playing
-   private Player jfplayer = new Player();
    // The current song that is being stored in memory
    private Song currSong;
    
    // Constructor
-   public OurPlayer() { /* do nothing... */ }
+   public OurPlayer() {
+      currSong = new Song();
+   }
 
    // Sets a song to be the current song, and then plays the song.
    public void playSong(Song s) {
       currSong = s;
-      jfplayer.play(s.toString());
+      ThreadPlayer tp = new ThreadPlayer(s);
+      tp.start();
    }
    // Save the current song
    public void saveSong() {
@@ -47,4 +48,22 @@ public class OurPlayer {
          e.printStackTrace();
       }
    }
+}
+
+// ThreadPlayer needs to be the one that is actually playing or saving or whatever.
+// Has it's own player
+class ThreadPlayer extends Thread {
+   private Player jfplayer;
+   private Song songToPlay;
+   
+   public ThreadPlayer(Song s) {
+      jfplayer = new Player();
+      songToPlay = s;
+   }
+   
+   @Override
+   public void run() {
+      jfplayer.play(songToPlay.toString());
+   }
+
 }
