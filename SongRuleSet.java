@@ -7,17 +7,13 @@
  |_____/ \___/|_| |_|\__, |_|  \_\__,_|_|\___|_____/ \___|\__|
                       __/ |                                   
                      |___/                                    
-An interface for defining what makes a complete song, from an array
-of patterns, and what methods need to be present for a ruleset to be 
-considered complete.
-
-In words the requirements for a complete pattern are as follows:
-1. How are patterns modified? (If at all)
-2. How are patterns fit together?
+An interface for defining what macro elements of the song should be set
+For example, songs will have dynamics, tempo, key, introduction and conclusion rule sets
+Each of which is applied to the song in turn
 */
 import org.jfugue.pattern.Pattern;
 import java.util.ArrayList;
 
 interface SongRuleSet {
-   Song generateSong(ArrayList<Pattern> patterns);
+   void generateSong(Song s);
 }

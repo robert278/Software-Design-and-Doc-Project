@@ -15,44 +15,27 @@ public class UIRequest {
    
    private UIEnums.RequestType request;
    private UIEnums.PatternType pattern;
-   private UIEnums.Key key;
-   private UIEnums.KeySignature keysig;
-   private UIEnums.Tempo tempo;
-   private UIEnums.Emotion emotion;
+   private UIEnums.LeadingInstrument instrument;
    
    // Regular constructor, to be used by UI
-   public UIRequest(UIEnums.RequestType r, UIEnums.PatternType p, UIEnums.Key k, UIEnums.KeySignature ks, UIEnums.Tempo t, UIEnums.Emotion e) {
+   public UIRequest(UIEnums.RequestType r, UIEnums.PatternType p, UIEnums.LeadingInstrument i) {
       request = r;
       pattern = p;
-      key = k;
-      keysig = ks;
-      tempo = t;
-      emotion = e;
+      instrument = i;
    }
    
    // Copy constructor, to be used by Bridge
    public UIRequest(UIRequest other) {
       this.request = other.request;
-      this.key = other.key;
-      this.keysig = other.keysig;
-      this.tempo = other.tempo;
-      this.emotion = other.emotion;
+      this.pattern = other.pattern;
+      this.instrument = other.instrument;
    }
    
    public UIEnums.RequestType GetRequestType() {
       return request;
    }
-   public UIEnums.Key GetKey() {
-      return key;
-   }
-   public UIEnums.KeySignature GetKeySignature() {
-      return keysig;
-   }
-   public UIEnums.Tempo GetTempo() {
-      return tempo;
-   }
-   public UIEnums.Emotion GetEmotion() {
-      return emotion;
+   public UIEnums.LeadingInstrument GetLeadingInstrument() {
+      return instrument;
    }
    public UIEnums.PatternType GetPattern() {
       return pattern;

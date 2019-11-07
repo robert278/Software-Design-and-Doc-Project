@@ -12,8 +12,7 @@ need to be present for a ruleset to be considered complete.
 In words the requirements for a complete pattern are as follows:
 1. What are the instruments that can be used in this pattern?                                                                       
 */
-import org.jfugue.pattern.Pattern;
 
 public interface PatternRuleSet {
-   Pattern generatePattern();
+   void generatePattern(Song s);
 }

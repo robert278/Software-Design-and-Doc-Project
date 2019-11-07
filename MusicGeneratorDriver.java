@@ -15,24 +15,20 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class MusicGeneratorDriver extends Frame implements ActionListener {
+public class MusicGeneratorDriver extends Frame {
    // UI Bridge.
    private UIAlgorithmBridge Interface = new UIAlgorithmBridge();
    // Buttons
    private Button generateButton;
    private Button exitButton;
+   private Button saveButton;
    // check box groups
-   private CheckboxGroup keySignature, timeSignature, instruments, tempo, durationofPiece, emotions, melodyType;
-   private Checkbox chkDisjunct;
-   private Checkbox chkConjunct;
+   private CheckboxGroup leadingInstrument, theme, emotion;
    
    // supporting options lists for each of the checkbox group
-   private String[] keySignatureList = {"C","F","G","D","A","E"};
-   private String[] timeSignatureList = {"4,4","2,2","2,4","3,4","3,8"};
-   private String[] instrumentsList = {"Keyboard","Piano","Guitar","Violin","Trumpet","Harp"};
-   private String[] tempoList = {"Tempo","Grave","Largo","Lento","Adagio","Andante"};
-   private String[] emotionList = {"Joy","Excitement","Surprise","Sadness","Depress","Cure"};
-   
+   private String[] leadingInstrumentList = {"Piano","Trumpet","Flute","Guitar","Choir","Strings","Violin"};
+   private String[] themeList = {"Calm","Intense"};
+   private String[] emotionList = {"Happy","Sad"};
    
    
    // Constructor for the driver, which contains most of the functionality for the UI.
@@ -52,58 +48,61 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       generateButton = new Button("Generate");
       generateButton.setBounds(40,60,100,50);
       add(generateButton);
-      generateButton.addActionListener(this);
+      generateButton.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+               UIRequest thisReq = createGenerateRequest(0);
+               Interface.acceptRequest(thisReq);
+            }
+         }
+         );
       
       // create exit button
       exitButton = new Button("Exit");
       exitButton.addActionListener(
          new ActionListener(){
             public void actionPerformed(ActionEvent e){
+               // createGenerateRequest(1) ??
                System.exit(0);
             }
          });
-      exitButton.setBounds(750, 380, 100, 50);
+      exitButton.setBounds(150, 60, 100, 50);
       //todo using selectionListener to exit the shell
       add(exitButton);
       
-      melodyType = new CheckboxGroup();
-      chkDisjunct = new Checkbox("Melody", false, melodyType);
-      chkDisjunct.setBounds(250, 80, 80, 30);
-      chkConjunct = new Checkbox("Melody+", false, melodyType);
-      chkConjunct.setBounds(350, 80, 80, 30);
-      add(chkDisjunct);
-      add(chkConjunct);
+      // create save button
+      saveButton = new Button("Save");
+      saveButton.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+               UIRequest thisReq = createGenerateRequest(2);
+               Interface.acceptRequest(thisReq);
+            }
+         }
+         );
+      saveButton.setBounds(260, 60, 100, 50);
+      add(saveButton);
       
       
       // create the checkbox groups on frame
-      Label ks, ts, ins, tem, emo;
-      ks = new Label("Key Signature");
-      ks.setBounds(70,150,85,30);
-      add(ks);
-      ts = new Label("Time Signature");
-      ts.setBounds(180, 150, 85, 30);
-      add(ts);
-      ins = new Label("Instruments");
-      ins.setBounds(300, 150, 85, 30);
-      add(ins);
-      tem = new Label("Tempo");
-      tem.setBounds(400, 150, 85, 30);
-      add(tem);
+      Label li, thm, emo;
+      li = new Label("Lead Instrument");
+      li.setBounds(50,150,85,30);
+      add(li);
+      thm = new Label("Theme");
+      thm.setBounds(200, 150, 85, 30);
+      add(thm);
       emo = new Label("Emotion");
-      emo.setBounds(500, 150, 85, 30);
+      emo.setBounds(350, 150, 85, 30);
       add(emo);
       
         
-      keySignature = new CheckboxGroup();
-      timeSignature = new CheckboxGroup();
-      instruments = new CheckboxGroup();
-      tempo = new CheckboxGroup();
-      emotions = new CheckboxGroup();
-      setCheckboxGroup(keySignature, keySignatureList, 100, 200, 80, 40);     
-      setCheckboxGroup(timeSignature, timeSignatureList, 200, 200, 80, 40);     
-      setCheckboxGroup(instruments, instrumentsList, 300, 200, 80, 40);    
-      setCheckboxGroup(tempo, tempoList, 400, 200, 80, 40); 
-      setCheckboxGroup(emotions, emotionList, 500, 200, 80, 40);
+      leadingInstrument = new CheckboxGroup();
+      theme = new CheckboxGroup();
+      emotion = new CheckboxGroup();
+      setCheckboxGroup(leadingInstrument, leadingInstrumentList, 50, 200, 80, 40);     
+      setCheckboxGroup(theme, themeList, 200, 200, 80, 40);     
+      setCheckboxGroup(emotion, emotionList, 350, 200, 80, 40);    
       
       // set title and screen size
       setTitle("Music Generator");
@@ -113,20 +112,7 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
       setVisible(true);
    }
    
-   @Override
-   public void actionPerformed(ActionEvent evt) {
-      System.out.println("Generate clicked. Creating UI Request.");
-      UIRequest gen = createGenerateRequest();
-      if(Interface.acceptRequest(gen)) {
-         System.out.println("Request accepted.");
-      }
-      else {
-         System.out.println("Request denied.");
-      }
-   }
-   
    public void setCheckboxGroup(CheckboxGroup g, String[] arr, int x, int y, int w, int h ) {
-      
       for(int i=0;i<arr.length;i++) {
          Checkbox c = new Checkbox(arr[i], g, false);
          c.setBounds(x, (y+i*h), w, h);
@@ -136,92 +122,52 @@ public class MusicGeneratorDriver extends Frame implements ActionListener {
    }
    
    // Uses the current configuration of the UI to create the UIRequest object.
-   public UIRequest createGenerateRequest() {
-      // Need request type, key, key signature, tempo, emotion
+   public UIRequest createGenerateRequest(int ReqType) {
+      // For parameter ReqType: 0 = Generate 1 = Exit 2 = Save
+      // Need request type, leading instrument, theme, emotion
       // Request
-      UIEnums.RequestType req = UIEnums.RequestType.GENERATE;
-      
+      UIEnums.RequestType req;
+      if(ReqType == 0)
+         req = UIEnums.RequestType.GENERATE;
+      else if(ReqType == 2)
+         req = UIEnums.RequestType.SAVE;
+      else 
+         req = UIEnums.RequestType.EXIT;
+         
       // Pattern type
-      UIEnums.PatternType pat;
-      if(melodyType.getSelectedCheckbox() == null) {
-         pat = UIEnums.PatternType.CONJUNCTMELODY;
+      UIEnums.PatternType pat = UIEnums.PatternType.HAPPYCALM;
+      if(theme.getSelectedCheckbox() == null || emotion.getSelectedCheckbox() == null) {
+         pat = UIEnums.PatternType.HAPPYCALM; // This is what I'd like to be ^_^
       }
       else {
-         switch(melodyType.getSelectedCheckbox().getLabel()) {
-            case "Melody": pat = UIEnums.PatternType.CONJUNCTMELODY;
-            case "Melody+": pat = UIEnums.PatternType.MELODYCHORDS;
-            default: pat = UIEnums.PatternType.MELODYCHORDS;
+         UIEnums.PatternType[] pats = {UIEnums.PatternType.SADCALM, UIEnums.PatternType.SADINTENSE, UIEnums.PatternType.HAPPYCALM, UIEnums.PatternType.HAPPYINTENSE};
+         String[] choices = {"SadCalm","SadIntense","HappyCalm","HappyIntense"};
+         String t = theme.getSelectedCheckbox().getLabel();
+         String e = emotion.getSelectedCheckbox().getLabel();
+         for(int i = 0; i < pats.length; i++) {
+            if(choices[i].equals(e+t))
+               pat = pats[i];
          }
       }
       
-      // Key
-      UIEnums.Key key;
-      if(keySignature.getSelectedCheckbox() == null) {
-         key = UIEnums.Key.C;
+      // Leading instrument
+      UIEnums.LeadingInstrument lead = UIEnums.LeadingInstrument.PIANO;
+      if(leadingInstrument.getSelectedCheckbox() == null) {
+         lead = UIEnums.LeadingInstrument.PIANO;
       }
       else {
-         switch(keySignature.getSelectedCheckbox().getLabel()) {
-            case "C": key = UIEnums.Key.C;
-            case "F": key = UIEnums.Key.F;
-            case "G": key = UIEnums.Key.G;
-            case "D": key = UIEnums.Key.D;
-            case "A": key = UIEnums.Key.A;
-            case "E": key = UIEnums.Key.E;
-            default: key = UIEnums.Key.C;
+         String l = leadingInstrument.getSelectedCheckbox().getLabel();
+         UIEnums.LeadingInstrument[] leads = {UIEnums.LeadingInstrument.PIANO, UIEnums.LeadingInstrument.FLUTE, UIEnums.LeadingInstrument.TRUMPET, UIEnums.LeadingInstrument.GUITAR,
+		 UIEnums.LeadingInstrument.CHOIR, UIEnums.LeadingInstrument.STRINGS, UIEnums.LeadingInstrument.VIOLIN};
+         String[] choices2 = {"Piano","Trumpet","Flute","Guitar","Choir","Strings","Violin"};
+         for(int i = 0; i < leads.length; i++) {
+            if(choices2[i].equals(l))
+               lead = leads[i];
          }
       }
-      
-      // Key Signature
-      UIEnums.KeySignature keysig;
-      if(keySignature.getSelectedCheckbox() == null) {
-         keysig = UIEnums.KeySignature.FOURFOUR;
-      }
-      else {
-         switch(timeSignature.getSelectedCheckbox().getLabel()) {
-            case "4,4": keysig = UIEnums.KeySignature.FOURFOUR;
-            case "2,2": keysig = UIEnums.KeySignature.TWOTWO;
-            case "2,4": keysig = UIEnums.KeySignature.TWOFOUR;
-            case "3,4": keysig = UIEnums.KeySignature.THREEFOUR;
-            case "3,8": keysig = UIEnums.KeySignature.THREEEIGHT;
-            default: keysig = UIEnums.KeySignature.FOURFOUR;
-         }
-      }
-      
-      // Tempo
-      UIEnums.Tempo tem;
-      if(tempo.getSelectedCheckbox() == null) {
-         tem = UIEnums.Tempo.ANDANTE;
-      }
-      else {
-         switch(tempo.getSelectedCheckbox().getLabel()) {
-            case "Grave": tem = UIEnums.Tempo.GRAVE;
-            case "Largo": tem = UIEnums.Tempo.LARGO;
-            case "Lento": tem = UIEnums.Tempo.LENTO;
-            case "Adagio": tem = UIEnums.Tempo.ADAGIO;
-            case "Andante": tem = UIEnums.Tempo.ANDANTE;
-            default: tem = UIEnums.Tempo.ANDANTE;
-         }
-      }
-      
-      // Emotion
-      UIEnums.Emotion emote;
-      if(emotions.getSelectedCheckbox() == null) {
-         emote = UIEnums.Emotion.JOY;
-      }
-      else {
-         switch(emotions.getSelectedCheckbox().getLabel()) {
-            case "Joy": emote = UIEnums.Emotion.JOY;
-            case "Excitement": emote = UIEnums.Emotion.EXCITEMENT;
-            case "Surprise": emote = UIEnums.Emotion.SURPRISE;
-            case "Sadness": emote = UIEnums.Emotion.SADNESS;
-            case "Depress": emote = UIEnums.Emotion.DEPRESS;
-            case "Cure": emote = UIEnums.Emotion.CURE;
-            default: emote = UIEnums.Emotion.JOY;
-         }
-      }
-      
+            
       // Create UIRequest object with the enums.
-      UIRequest thisRequest = new UIRequest(req, pat, key, keysig, tem, emote);
+      UIRequest thisRequest = new UIRequest(req, pat, lead);
       return thisRequest;
    }
    
