@@ -36,6 +36,14 @@ public class Song {
       return true;
    }
    
+   public int gettempo() {
+	   return tempo;
+   }
+   
+   public ArrayList getvoices() {
+	   return voices;
+   }
+   
    public String toString() {
       String song = "T"+tempo+" ";
       for(int i = 0; i < voices.size(); i++) {
