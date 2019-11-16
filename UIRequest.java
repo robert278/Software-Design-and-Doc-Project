@@ -11,50 +11,45 @@
 * The purpose of this class to encapsulate the state of the UI as a request, that can be passed to the bridge between the UI and SongGenerator.
 * The SongGenerator bridge can then unpack it, and fulfil the request with the help of the SongGenerator subcomponets.
 */
+import java.util.ArrayList;
+
 public class UIRequest {
    
    private UIEnums.RequestType request;
-   private UIEnums.PatternType pattern;
-   private UIEnums.Key key;
-   private UIEnums.KeySignature keysig;
-   private UIEnums.Tempo tempo;
-   private UIEnums.Emotion emotion;
+   private ArrayList<UIEnums.Instrument> instrument = new ArrayList<UIEnums.Instrument>();
+   private ArrayList<UIEnums.Theme> theme = new ArrayList<UIEnums.Theme>();
    
    // Regular constructor, to be used by UI
-   public UIRequest(UIEnums.RequestType r, UIEnums.PatternType p, UIEnums.Key k, UIEnums.KeySignature ks, UIEnums.Tempo t, UIEnums.Emotion e) {
+   public UIRequest(UIEnums.RequestType r, ArrayList<UIEnums.Instrument> i, ArrayList<UIEnums.Theme> t) {
       request = r;
-      pattern = p;
-      key = k;
-      keysig = ks;
-      tempo = t;
-      emotion = e;
+      instrument.addAll(i);
+      theme.addAll(t);
    }
    
    // Copy constructor, to be used by Bridge
    public UIRequest(UIRequest other) {
       this.request = other.request;
-      this.key = other.key;
-      this.keysig = other.keysig;
-      this.tempo = other.tempo;
-      this.emotion = other.emotion;
+      this.instrument = other.instrument;
+      this.theme = other.theme;
    }
    
    public UIEnums.RequestType GetRequestType() {
       return request;
    }
-   public UIEnums.Key GetKey() {
-      return key;
+   public UIEnums.Instrument GetInstrument(int num) {
+      if(num < instrument.size())
+         return instrument.get(num);
+      return null;
    }
-   public UIEnums.KeySignature GetKeySignature() {
-      return keysig;
+   public UIEnums.Theme GetTheme(int num) {
+      if(num < theme.size())
+         return theme.get(num);
+      return null;
    }
-   public UIEnums.Tempo GetTempo() {
-      return tempo;
-   }
-   public UIEnums.Emotion GetEmotion() {
-      return emotion;
-   }
-   public UIEnums.PatternType GetPattern() {
-      return pattern;
-   }
+  public int GetNumInstruments() {
+   return instrument.size();
+  }
+  public int GetNumThemes() {
+   return theme.size();
+  }
 }

@@ -35,6 +35,7 @@ import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.border.LineBorder;
 
+import java.util.ArrayList;
 
 public class MusicGeneratorDriver extends JFrame implements ActionListener {
    // Buttons
@@ -124,6 +125,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       btnSave.setForeground(Color.BLACK);
       btnSave.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
       btnSave.setBackground(SystemColor.inactiveCaptionBorder);
+      btnSave.addActionListener(this);
       mainPanel.add(btnSave);
    	
       
@@ -143,6 +145,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       btnPlay.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
       btnPlay.setBackground(SystemColor.inactiveCaptionBorder);
       btnPlay.setBounds(280, 559, 200, 70);
+      btnPlay.addActionListener(this);
       mainPanel.add(btnPlay);
    	
       
@@ -152,6 +155,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       btnPause.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
       btnPause.setBackground(SystemColor.inactiveCaptionBorder);
       btnPause.setBounds(520, 559, 200, 70);
+      btnPause.addActionListener(this);
       mainPanel.add(btnPause);
    	
       
@@ -631,13 +635,13 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
    }
    
    public void actionPerformed(ActionEvent e) {
-     /* String action = e.getActionCommand();
+      String action = e.getActionCommand();
+      System.out.println(action);
       // Check if secA_Piano_Button is checked
-      if(       
       if(secA_Piano_Button.isSelected() == true)
          System.out.println("Remember, you are mortal.");
       else
-         System.out.println("Unlimited power!!");*/
+         System.out.println("Unlimited power!!");
    }
    
    private class SwingAction extends AbstractAction {
@@ -649,52 +653,109 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       }
    }
    
-   /*public UIRequest createGenerateRequest(int ReqType) {
-      // For parameter ReqType: 0 = Generate 1 = Exit 2 = Save
-      // Need request type, leading instrument, theme, emotion
+   public UIRequest createGenerateRequest(int ReqType) {
+      // For parameter ReqType: 
+      // 0 = Generate 
+      // 1 = Pause 
+      // 2 = Save
+      // 3 = Browse
+      // 4 = PlayLoaded
+      // Need request type, leading instrument(s), theme(s)
       // Request
       UIEnums.RequestType req;
       if(ReqType == 0)
          req = UIEnums.RequestType.GENERATE;
+      else if(ReqType == 1)
+         req = UIEnums.RequestType.PAUSE;
       else if(ReqType == 2)
          req = UIEnums.RequestType.SAVE;
-      else 
-         req = UIEnums.RequestType.EXIT;
+      else if(ReqType == 3)
+         req = UIEnums.RequestType.BROWSE;
+      else //if(ReqType == 4)
+         req = UIEnums.RequestType.PLAYLOADED;
          
-      // Pattern type
-      UIEnums.PatternType pat = UIEnums.PatternType.HAPPYCALM;
-      if(theme.getSelectedCheckbox() == null || emotion.getSelectedCheckbox() == null) {
-         pat = UIEnums.PatternType.HAPPYCALM; // This is what I'd like to be ^_^
-      }
-      else {
-         UIEnums.PatternType[] pats = {UIEnums.PatternType.SADCALM, UIEnums.PatternType.SADINTENSE, UIEnums.PatternType.HAPPYCALM, UIEnums.PatternType.HAPPYINTENSE};
-         String[] choices = {"SadCalm","SadIntense","HappyCalm","HappyIntense"};
-         String t = theme.getSelectedCheckbox().getLabel();
-         String e = emotion.getSelectedCheckbox().getLabel();
-         for(int i = 0; i < pats.length; i++) {
-            if(choices[i].equals(e+t))
-               pat = pats[i];
-         }
-      }
+      // Reading in themes
+      ArrayList<UIEnums.Theme> themes = new ArrayList<UIEnums.Theme>();
+      // Section A
+      if(secA_Happy_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.HAPPY);
+      else if(secA_Calm_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.CALM);
+      else if(secA_Sad_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.SAD);
+      else if(secA_Intense_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.INTENSE);
+      else if(secA_Oriental_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.ORIENTAL);
+      else if(secA_Spooky_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.SPOOKY);
+        
+      // Section B
+      if(secB_Happy_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.HAPPY);
+      else if(secB_Calm_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.CALM);
+      else if(secB_Sad_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.SAD);
+      else if(secB_Intense_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.INTENSE);
+      else if(secB_Oriental_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.ORIENTAL);
+      else if(secB_Spooky_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.SPOOKY);
+         
+      // Section C 
+      if(secC_Happy_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.HAPPY);
+      else if(secC_Calm_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.CALM);
+      else if(secC_Sad_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.SAD);
+      else if(secC_Intense_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.INTENSE);
+      else if(secC_Oriental_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.ORIENTAL);
+      else if(secC_Spooky_Button.isSelected() == true)
+         themes.add(UIEnums.Theme.SPOOKY);
+         
+      // Reading in leading instruments
+      ArrayList<UIEnums.Instrument> instruments = new ArrayList<UIEnums.Instrument>();
+      // Section A
+      if(secA_Piano_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.PIANO);
+      else if(secA_Brass_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.BRASS);
+      else if(secA_Synth_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.SYNTH);
+      else if(secA_Guitar_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.GUITAR);
+      else if(secA_Strings_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.STRINGS);
       
-      // Leading instrument
-      UIEnums.LeadingInstrument lead = UIEnums.LeadingInstrument.PIANO;
-      if(leadingInstrument.getSelectedCheckbox() == null) {
-         lead = UIEnums.LeadingInstrument.PIANO;
-      }
-      else {
-         String l = leadingInstrument.getSelectedCheckbox().getLabel();
-         UIEnums.LeadingInstrument[] leads = {UIEnums.LeadingInstrument.PIANO, UIEnums.LeadingInstrument.FLUTE, UIEnums.LeadingInstrument.TRUMPET, UIEnums.LeadingInstrument.GUITAR,
-		 UIEnums.LeadingInstrument.CHOIR, UIEnums.LeadingInstrument.STRINGS, UIEnums.LeadingInstrument.VIOLIN};
-         String[] choices2 = {"Piano","Trumpet","Flute","Guitar","Choir","Strings","Violin"};
-         for(int i = 0; i < leads.length; i++) {
-            if(choices2[i].equals(l))
-               lead = leads[i];
-         }
-      }
-            
-      // Create UIRequest object with the enums.
-      UIRequest thisRequest = new UIRequest(req, pat, lead);
-      return thisRequest;
-   }*/
+      // Section B
+      if(secB_Piano_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.PIANO);
+      else if(secB_Brass_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.BRASS);
+      else if(secB_Synth_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.SYNTH);
+      else if(secB_Guitar_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.GUITAR);
+      else if(secB_Strings_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.STRINGS);
+         
+     // Section C
+     if(secC_Piano_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.PIANO);
+      else if(secC_Brass_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.BRASS);
+      else if(secC_Synth_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.SYNTH);
+      else if(secC_Guitar_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.GUITAR);
+      else if(secC_Strings_Button.isSelected() == true)
+         instruments.add(UIEnums.Instrument.STRINGS);
+         
+      return new UIRequest(req, instruments, themes);
+   }
 }
