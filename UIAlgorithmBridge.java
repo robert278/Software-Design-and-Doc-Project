@@ -28,7 +28,21 @@ public class UIAlgorithmBridge {
    public boolean acceptRequest(UIRequest newAction) {
       // Check the type of the request
       request = newAction;
-      if(request.GetRequestType() == UIEnums.RequestType.STOP) {
+      if(request.GetRequestType() == UIEnums.RequestType.GENERATE)
+         handleGenerate();
+      else if(request.GetRequestType() == UIEnums.RequestType.PAUSE)
+         handlePause();
+      else if(request.GetRequestType() == UIEnums.RequestType.SAVE)
+         handleSave();
+      else if(request.GetRequestType() == UIEnums.RequestType.BROWSE)
+         handleBrowse();  
+      else if(request.GetRequestType() == UIEnums.RequestType.PLAYLOADED)
+         handlePlayLoaded(); 
+      else if(request.GetRequestType() == UIEnums.RequestType.UNPAUSE)
+         handleUnpause();
+         
+      return true;
+      /*if(request.GetRequestType() == UIEnums.RequestType.STOP) {
          // OurPlayer.stop()
       }
       if(request.GetRequestType() == UIEnums.RequestType.SAVE) {
@@ -46,21 +60,21 @@ public class UIAlgorithmBridge {
          }
          else if(request.GetPattern() == UIEnums.PatternType.MELODYCHORDS) {
             // Use a specific emotional pattern
-			// Check if "Joy" or "Saddness"
-			
-			// Sadness: Use the ChordMelodyPattern.java ruleset.
-			if(request.GetEmotion() == UIEnums.Emotion.SADNESS) {
-				ChordMelodyPattern patternGen = new ChordMelodyPattern();
+   		// Check if "Joy" or "Saddness"
+   		
+   		// Sadness: Use the ChordMelodyPattern.java ruleset.
+   		if(request.GetEmotion() == UIEnums.Emotion.SADNESS) {
+   			ChordMelodyPattern patternGen = new ChordMelodyPattern();
             // Create patterns
-				for(int i = 0; i < 5; i++)
-					patterns.add(patternGen.generatePattern());
-			}
-			else /*if(request.GetEmotion() == UIEnums.Emotion.JOY)*/ {
-				HappyPattern patternGen = new HappyPattern();
-				// Create patterns
-				for(int i = 0; i < 5; i++)
-					patterns.add(patternGen.generatePattern());
-			}
+   			for(int i = 0; i < 5; i++)
+   				patterns.add(patternGen.generatePattern());
+   		}
+   		else /*if(request.GetEmotion() == UIEnums.Emotion.JOY)*/ /*{
+   			/*HappyPattern patternGen = new HappyPattern();
+   			// Create patterns
+   			for(int i = 0; i < 5; i++)
+   				patterns.add(patternGen.generatePattern());
+   		}
          }
          
          // Send created patterns to the pattern bank (is this necessary?)
@@ -68,12 +82,31 @@ public class UIAlgorithmBridge {
          // Have the song accept the patterns
          Song thisSong = new Song();
          thisSong.AcceptPatterns(patterns);
-		   //patterns.clear();
+   	   //patterns.clear();
          
          // Send the completed song to the player
          OurPlayer thisPlayer = new OurPlayer();
          thisPlayer.playSong(thisSong);
-      }
-      return true;
+      }*/
+   }
+   
+   // Private helper methods for each type of request
+   private void handleGenerate() {
+   
+   }
+   private void handlePause() {
+   
+   }
+   private void handleSave() {
+   
+   }
+   private void handleBrowse() {
+   
+   }
+   private void handlePlayLoaded() {
+   
+   }
+   private void handleUnpause() {
+   
    }
 }

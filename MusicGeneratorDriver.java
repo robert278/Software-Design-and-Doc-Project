@@ -38,7 +38,13 @@ import javax.swing.border.LineBorder;
 import java.util.ArrayList;
 
 public class MusicGeneratorDriver extends JFrame implements ActionListener {
-   // Buttons
+   // UI - Algorithm mediator
+   UIAlgorithmBridge medi = new UIAlgorithmBridge();
+   
+   // Action Buttons
+   private JButton btnExit, btnSave, btnGenerate, btnPlay, btnPause;
+   
+   // Radio Buttons
    private JRadioButton secA_Happy_Button, secA_Calm_Button, secA_Sad_Button, secA_Intense_Button, secA_Oriental_Button, secA_Spooky_Button;
    private JRadioButton secB_Happy_Button, secB_Calm_Button, secB_Sad_Button, secB_Intense_Button, secB_Oriental_Button, secB_Spooky_Button;
    private JRadioButton secC_Happy_Button, secC_Calm_Button, secC_Sad_Button, secC_Intense_Button, secC_Oriental_Button, secC_Spooky_Button;
@@ -104,7 +110,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       setContentPane(mainPanel);
    	
    	// Exit button setup
-      JButton btnExit = new JButton("Exit");
+      btnExit = new JButton("Exit");
       btnExit.setBounds(1000, 559, 200, 70);
       btnExit.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
       btnExit.addActionListener(
@@ -120,7 +126,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
    	
       
       // Save button
-      JButton btnSave = new JButton("Save");
+      btnSave = new JButton("Save");
       btnSave.setBounds(760, 559, 200, 70);
       btnSave.setForeground(Color.BLACK);
       btnSave.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
@@ -130,7 +136,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
    	
       
       // Generate button
-      JButton btnGenerate = new JButton("Generate");
+      btnGenerate = new JButton("Generate");
       btnGenerate.setBounds(40, 559, 200, 70);
       btnGenerate.setForeground(Color.BLACK);
       btnGenerate.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
@@ -139,8 +145,8 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       mainPanel.add(btnGenerate);
    	
       
-      // Play button
-      JButton btnPlay = new JButton("Play");
+      // Load / Play button
+      btnPlay = new JButton("Load");
       btnPlay.setForeground(Color.BLACK);
       btnPlay.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
       btnPlay.setBackground(SystemColor.inactiveCaptionBorder);
@@ -149,8 +155,8 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       mainPanel.add(btnPlay);
    	
       
-      // Pause button
-      JButton btnPause = new JButton("Pause");
+      // Pause / Unpause button
+      btnPause = new JButton("Pause");
       btnPause.setForeground(Color.BLACK);
       btnPause.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 30));
       btnPause.setBackground(SystemColor.inactiveCaptionBorder);
@@ -636,12 +642,30 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
    
    public void actionPerformed(ActionEvent e) {
       String action = e.getActionCommand();
-      System.out.println(action);
-      // Check if secA_Piano_Button is checked
-      if(secA_Piano_Button.isSelected() == true)
-         System.out.println("Remember, you are mortal.");
-      else
-         System.out.println("Unlimited power!!");
+      UIRequest thisRequest;
+      //System.out.println(action);
+      if(action.equals("Generate") == true)
+         thisRequest = createGenerateRequest(0);
+      else if(action.equals("Pause") == true) {
+         thisRequest = createGenerateRequest(1);
+         btnPause.setText("Unpause");
+      }
+      else if(action.equals("Save") == true)
+         thisRequest = createGenerateRequest(2);
+      else if(action.equals("Load") == true) {
+         btnPlay.setText("Play");
+         thisRequest = createGenerateRequest(3);
+      }
+      else if(action.equals("Play") == true) {
+         thisRequest = createGenerateRequest(4);
+         btnPlay.setText("Load");
+      }
+      else /*if(action.equals("Unpause") == true)*/ {
+         thisRequest = createGenerateRequest(5);
+         btnPause.setText("Pause");
+      }
+      
+      medi.acceptRequest(thisRequest);
    }
    
    private class SwingAction extends AbstractAction {
@@ -660,6 +684,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       // 2 = Save
       // 3 = Browse
       // 4 = PlayLoaded
+      // 5 = Unpause
       // Need request type, leading instrument(s), theme(s)
       // Request
       UIEnums.RequestType req;
@@ -671,8 +696,10 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
          req = UIEnums.RequestType.SAVE;
       else if(ReqType == 3)
          req = UIEnums.RequestType.BROWSE;
-      else //if(ReqType == 4)
+      else if(ReqType == 4)
          req = UIEnums.RequestType.PLAYLOADED;
+      else //if(ReqType == 5)
+         req = UIEnums.RequestType.UNPAUSE;
          
       // Reading in themes
       ArrayList<UIEnums.Theme> themes = new ArrayList<UIEnums.Theme>();
@@ -745,7 +772,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
          instruments.add(UIEnums.Instrument.STRINGS);
          
      // Section C
-     if(secC_Piano_Button.isSelected() == true)
+      if(secC_Piano_Button.isSelected() == true)
          instruments.add(UIEnums.Instrument.PIANO);
       else if(secC_Brass_Button.isSelected() == true)
          instruments.add(UIEnums.Instrument.BRASS);

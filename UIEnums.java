@@ -11,7 +11,7 @@ well as the types of requests that are supported by the bridge.
 */
 public class UIEnums {
    public enum RequestType {
-      GENERATE, PAUSE, SAVE, BROWSE, PLAYLOADED;
+      GENERATE, PAUSE, SAVE, BROWSE, PLAYLOADED, UNPAUSE;
    }
    enum Instrument {
       PIANO, BRASS, SYNTH, GUITAR, STRINGS;
