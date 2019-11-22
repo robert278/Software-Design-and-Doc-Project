@@ -21,4 +21,11 @@ public class Voice {
       }
       return voice;
    }
+   
+   public Voice concatVoices(Voice other) {
+      for(int i = 0; i < other.phrases.size(); i++) {
+         this.phrases.add(other.phrases.get(i));
+      }
+      return this;
+   }
 }
