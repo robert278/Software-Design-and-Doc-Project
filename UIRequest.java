@@ -46,10 +46,10 @@ public class UIRequest {
          return theme.get(num);
       return null;
    }
-  public int GetNumInstruments() {
-   return instrument.size();
-  }
-  public int GetNumThemes() {
-   return theme.size();
-  }
+   public int GetNumInstruments() {
+      return instrument.size();
+   }
+   public int GetNumThemes() {
+      return theme.size();
+   }
 }

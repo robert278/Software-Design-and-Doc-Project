@@ -214,7 +214,7 @@ public class ChordMelodyPattern implements PatternRuleSet {
          String firstNote = nextFirstNote;
        
          // Add the chord in the progression and the first note of the measure to the string.
-         returnSong = returnSong + getChordNotes(progression[i]) + "+" + firstNote + " ";
+         returnSong = returnSong + getChordNotes(progression[i]) + "+" + firstNote + "q ";
        
        // Second note can either be a repeat of the first note (25% of the time), and the third note a random chord tone
        // or the second note and third note can be jointly determined to be a passing and chord tone (75% of the time)
@@ -224,7 +224,7 @@ public class ChordMelodyPattern implements PatternRuleSet {
          if(secondNoteDecider == 0) { 
          // Repeat the first note
             secondNote = firstNote;
-            returnSong = returnSong + secondNote + " ";
+            returnSong = returnSong + secondNote + "_";
          // Make the third note a chord tone
             int thirdNoteDecider = (int)(Math.random()*3);
             if(thirdNoteDecider == 0) 
@@ -250,8 +250,8 @@ public class ChordMelodyPattern implements PatternRuleSet {
           // There should always be a passing tone between notes within the same chord.
          }
        // Add the second and third notes to the song.
-         returnSong = returnSong + secondNote + " ";
-         returnSong = returnSong + thirdNote + " ";
+         returnSong = returnSong + secondNote + "_";
+         returnSong = returnSong + thirdNote + "_";
        
        // The fourth note can be a repeat of the third note (if no passing tone exists)
        // or the fourth note can be a passing tone between two chords (if it exists)

@@ -123,7 +123,6 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       btnExit.setForeground(SystemColor.activeCaptionText);
       btnExit.setBackground(SystemColor.inactiveCaptionBorder);
       mainPanel.add(btnExit);
-   	
       
       // Save button
       btnSave = new JButton("Save");

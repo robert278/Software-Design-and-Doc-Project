@@ -22,6 +22,7 @@ import org.jfugue.pattern.Pattern;
 
 public class UIAlgorithmBridge {
    private UIRequest request;
+   private OurPlayer thisPlayer = new OurPlayer();
    
    public UIAlgorithmBridge() { /* do nothing */  } 
    
@@ -44,20 +45,57 @@ public class UIAlgorithmBridge {
       return true;
       /*if(request.GetRequestType() == UIEnums.RequestType.STOP) {
          // OurPlayer.stop()
+=======
+      Song s;
+      if(request.GetRequestType() == UIEnums.RequestType.EXIT) {
+         // ???
+>>>>>>> master
       }
       if(request.GetRequestType() == UIEnums.RequestType.SAVE) {
-         // OurPlayer.save()?
+         // Save request.
+		 thisPlayer.saveSong();
       }
       if(request.GetRequestType() == UIEnums.RequestType.GENERATE) {
+      // Determine the lead instrument
+         String lead;
+         if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.FLUTE)
+            lead = "Flute";
+         else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.TRUMPET)
+            lead = "Trumpet";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.GUITAR)
+			lead = "Guitar";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.CHOIR)
+			lead = "Choir_Aahs";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.STRINGS)
+			lead = "String_Ensemble_1";
+		else if(request.GetLeadingInstrument() == UIEnums.LeadingInstrument.VIOLIN)
+			lead = "Violin";
+         else
+            lead = "Piano";
+         TempoDecorator t;
+       // Create an empty song
+         s = new Song();
          // Check the pattern type
          ArrayList<Pattern> patterns = new ArrayList<Pattern>();
-         if(request.GetPattern() == UIEnums.PatternType.CONJUNCTMELODY) {
-            // Use the melody.java ruleset.
-            melody melodyGenerator = new melody();
-            // Create patterns
-            for(int i = 0; i < 5; i++)
-               patterns.add(melodyGenerator.generatePattern());
+         if(request.GetPattern() == UIEnums.PatternType.HAPPYCALM) {
+         // Really means happy.
+            t = new TempoDecorator((int)(Math.random()*100)+120);
+            HappyPattern h;
+            String[] CNotes = {"C","D","E","F","G","A","B"};
+            String[] CAllowedNotes = {"G4","A5","B5","C5","D5","E5","F5","G5","A6","B6","C6","D6","E6","F6","G6"};
+            String[] GNotes = {"G","A","B","C","D","E","F#"};
+            String[] GAllowedNotes = {"D5","E5","F#5","G5","A6","B6","C6","D6","E6","F#6","G6","A7","B7","C7","D7"};
+            int keyDecider = (int)(Math.random()*2);
+            if(keyDecider == 0) {
+               h = new HappyPattern("C", CNotes, CAllowedNotes, lead);
+            }
+            else {
+               h = new HappyPattern("G", GNotes, GAllowedNotes, lead);
+            }
+         
+            h.generatePattern(s);
          }
+<<<<<<< HEAD
          else if(request.GetPattern() == UIEnums.PatternType.MELODYCHORDS) {
             // Use a specific emotional pattern
    		// Check if "Joy" or "Saddness"
@@ -75,10 +113,63 @@ public class UIAlgorithmBridge {
    			for(int i = 0; i < 5; i++)
    				patterns.add(patternGen.generatePattern());
    		}
+=======
+         else if(request.GetPattern() == UIEnums.PatternType.HAPPYINTENSE) {
+          // Really means intense
+          System.out.println("Is intense.");
+          int tempoDecider = ((int)(Math.random()*75)) + 300;
+            t = new TempoDecorator(tempoDecider);
+         
+            SadPattern sad;
+            String[] DNotes = {"D", "E", "F", "G", "A", "Bb", "C"};
+            String[] DAllowedNotes = {"D4","E4","F4","G4","A5","Bb5","C5","D5","E5","F5","G5","A6"};
+            String[] ANotes = {"A", "B", "C", "D", "E", "F", "G"};
+            String[] AAllowedNotes = {"A4","B4","C4","D4","E4","F4","G4","A5","B5","C5","D5","E5"};
+            int keyDecider = (int)(Math.random()*2);
+            if(keyDecider == 0) {
+               sad = new SadPattern("D", DNotes, DAllowedNotes, lead);
+            }
+            else {
+               sad = new SadPattern("A", ANotes, AAllowedNotes, lead);
+            }
+         
+            sad.generatePattern(s);
          }
+         else if(request.GetPattern() == UIEnums.PatternType.SADCALM) {
+          // Really means calm
+            t = new TempoDecorator(80);
          
-         // Send created patterns to the pattern bank (is this necessary?)
+            CalmPattern c;
+            String[] BNotes = {"B","C#","D#","E","F#","G#","A#"};
+            String[] BAllowedNotes = {"B4","C#4","D#4","E4","F#4","G#4","A#4","B5","C#5","D#5","E5","F#5","G#5","A#5","B6","C#6","D#6"};
+            c = new CalmPattern("B",BNotes, BAllowedNotes, lead);
          
+            c.generatePattern(s);
+         }
+         else { // SADINTENSE
+         // Really means sad
+            t = new TempoDecorator((int)(Math.random()*70)+40);
+         
+            SadPattern sad;
+            String[] DNotes = {"D", "E", "F", "G", "A", "Bb", "C"};
+            String[] DAllowedNotes = {"D4","E4","F4","G4","A5","Bb5","C5","D5","E5","F5","G5","A6"};
+            String[] ANotes = {"A", "B", "C", "D", "E", "F", "G"};
+            String[] AAllowedNotes = {"A4","B4","C4","D4","E4","F4","G4","A5","B5","C5","D5","E5"};
+            int keyDecider = (int)(Math.random()*2);
+            if(keyDecider == 0) {
+               sad = new SadPattern("D", DNotes, DAllowedNotes, lead);
+            }
+            else {
+               sad = new SadPattern("A", ANotes, AAllowedNotes, lead);
+            }
+         
+            sad.generatePattern(s);
+>>>>>>> master
+         }
+       
+         
+         
+<<<<<<< HEAD
          // Have the song accept the patterns
          Song thisSong = new Song();
          thisSong.AcceptPatterns(patterns);
@@ -108,5 +199,13 @@ public class UIAlgorithmBridge {
    }
    private void handleUnpause() {
    
+      // Have the song go through the various song rule decorators
+      /*   t.generateSong(s);
+         
+         // Send the completed song to the player
+         System.out.println(s.toString());
+         thisPlayer.playSong(s);
+      }
+      return true;*/
    }
 }
