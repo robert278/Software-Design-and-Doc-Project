@@ -43,4 +43,14 @@ public class Song {
       }
       return song;
    }
+   
+   public boolean addSong(Song other) {
+      for(int i = 0; i < other.voices.size(); i++) {
+         if(i < voices.size())
+            voices.set(i, voices.get(i).concatVoices(other.voices.get(i)));
+         else
+            voices.add(other.voices.get(i));
+      }
+      return true;
+   }
 }
