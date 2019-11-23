@@ -322,4 +322,10 @@ public class ChordMelodyPattern implements PatternRuleSet {
     		//STRETCH GOAL TO RECORD -> THE IMPLEMENTATION OF THIS.
    }
 
+@Override
+public void generatePattern(Song s) {
+	// TODO Auto-generated method stub
+	
+}
+
 }

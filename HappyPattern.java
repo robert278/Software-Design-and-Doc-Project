@@ -29,8 +29,12 @@ public class HappyPattern implements PatternRuleSet {
       percussion = new Voice("Tubular_Bells");
    }
    
-   // Enum which contains all the chord types, which can be used to determine chords regardless of key.
-   private enum Chords { OneMajor, TwoMinor, ThreeMinor, FourMajor, FiveMajor, SixMinor; }
+   public HappyPattern() {
+	// TODO Auto-generated constructor stub
+}
+
+// Enum which contains all the chord types, which can be used to determine chords regardless of key.
+   public enum Chords { OneMajor, TwoMinor, ThreeMinor, FourMajor, FiveMajor, SixMinor; }
    
    // Method to get what the next chord should be, given that the previous chord was.
    private Chords getNextChord(Chords prevChord) {
@@ -97,7 +101,7 @@ public class HappyPattern implements PatternRuleSet {
    // Returns a string of notes, in jfugue notation, that can be played for the chord
    // Important extension: This can eventually be modified such that a key is also a parameter.
    // Currently uses the jfugue notation, which means major chords use root, fifth, and octive.
-   private String getChordNotes(Chords chord) {
+   public String getChordNotes(Chords chord) {
       Chords[] Choices = {Chords.OneMajor, Chords.TwoMinor, Chords.ThreeMinor, Chords.FourMajor, Chords.FiveMajor, Chords.SixMinor};
    // C scale: C D E F G A B
       String[] CChords = {"Cmaj", "Dmin", "Emin", "Fmaj", "Gmaj", "Amin"};
@@ -205,7 +209,7 @@ public class HappyPattern implements PatternRuleSet {
 	// Method to generate all the chord progressions at once, that way we can
 	// know what the next chord is going to be before the measure has started.
 	// This is necessary for passing tones at the start of measures.
-   private Chords[] generateProgression() {
+   Chords[] generateProgression() {
       Chords[] progression = new Chords[8];
      
       progression[1] = Chords.OneMajor;
@@ -280,7 +284,7 @@ public class HappyPattern implements PatternRuleSet {
       return valid;
    }
 	
-   private String[] createSingleMeasure(Chords progression) {
+   public String[] createSingleMeasure(Chords progression) {
       String[] phrase;
    	
    	// Source and destination, source must be higher than the destination

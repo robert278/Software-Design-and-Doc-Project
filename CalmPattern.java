@@ -89,7 +89,7 @@ public class CalmPattern {
    // Returns a string of notes, in jfugue notation, that can be played for the chord
    // Important extension: This can eventually be modified such that a key is also a parameter.
    // Currently uses the jfugue notation, which means major chords use root, fifth, and octive.
-   private String getChordNotes(Chords chord) {
+   public String getChordNotes(Chords chord) {
       Chords[] Choices = {Chords.OneMinor, Chords.TwoDiminished, Chords.ThreeMajor, Chords.FourMinor, Chords.FiveMajor, Chords.SixMajor};
    // D minor scale: D E F G A Bb C D
       String[] DChords = {"Dmin", "Edim", "Fmaj", "Gmin", "Amaj", "Bbmaj"};

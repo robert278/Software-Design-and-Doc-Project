@@ -8,24 +8,25 @@ public class Voice {
       instrument = i;
       phrases = new ArrayList<Phrase>();
    }
-   
+   public Voice(String i, ArrayList<Phrase> a) {
+	   instrument = i;
+	   phrases = a;
+   }
    public boolean addPhrase(Phrase p) {
       phrases.add(p);
       return true;
    }
-   
+   public String getinstrument() {
+	   return instrument;
+   }
+   public ArrayList<Phrase> getphrases() {
+	   return phrases;
+   }
    public String toString() {
       String voice = " I["+instrument+"] ";
       for(int i = 0; i < phrases.size(); i++) {
          voice = voice+phrases.get(i).toString();
       }
       return voice;
-   }
-   
-   public Voice concatVoices(Voice other) {
-      for(int i = 0; i < other.phrases.size(); i++) {
-         this.phrases.add(other.phrases.get(i));
-      }
-      return this;
    }
 }

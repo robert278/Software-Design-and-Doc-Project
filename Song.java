@@ -36,21 +36,19 @@ public class Song {
       return true;
    }
    
+   public int gettempo() {
+	   return tempo;
+   }
+   
+   public ArrayList<Voice> getvoices() {
+	   return voices;
+   }
+   
    public String toString() {
       String song = "T"+tempo+" ";
       for(int i = 0; i < voices.size(); i++) {
          song = song+" V"+i+" "+voices.get(i).toString();
       }
       return song;
-   }
-   
-   public boolean addSong(Song other) {
-      for(int i = 0; i < other.voices.size(); i++) {
-         if(i < voices.size())
-            voices.set(i, voices.get(i).concatVoices(other.voices.get(i)));
-         else
-            voices.add(other.voices.get(i));
-      }
-      return true;
    }
 }

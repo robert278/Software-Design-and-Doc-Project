@@ -22,7 +22,9 @@ public class Phrase {
       notes.addAll(extraNotes);
       return true;
    }
-   
+   public ArrayList<String> getnotes(){
+	   return notes;
+   }
    // Appends notes to the end of the phrase
    public boolean addNotes(String[] extraNotes) {
       for(int i = 0; i < extraNotes.length; i++) {
