@@ -12,18 +12,33 @@
 * The SongGenerator bridge can then unpack it, and fulfil the request with the help of the SongGenerator subcomponets.
 */
 import java.util.ArrayList;
+import java.io.File;
 
 public class UIRequest {
    
+   // Member variables for generate.
    private UIEnums.RequestType request;
    private ArrayList<UIEnums.Instrument> instrument = new ArrayList<UIEnums.Instrument>();
    private ArrayList<UIEnums.Theme> theme = new ArrayList<UIEnums.Theme>();
+   
+   // Member variables for loading
+   private File loadedFile;
+   
    
    // Regular constructor, to be used by UI
    public UIRequest(UIEnums.RequestType r, ArrayList<UIEnums.Instrument> i, ArrayList<UIEnums.Theme> t) {
       request = r;
       instrument.addAll(i);
       theme.addAll(t);
+   }
+   
+   public boolean setFile(File f) {
+      loadedFile = f;
+      return true;
+   }
+   
+   public File getFile() {
+      return loadedFile;
    }
    
    // Copy constructor, to be used by Bridge
