@@ -3,22 +3,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SadPattern {
-	Voice melody;
-	Voice chords;
-	Voice percussion;
-	String key;
-	String[] keyNotes;
-	String[] allowedNotes;
-	int measureLength = 0;
+   Voice melody;
+   Voice chords;
+   Voice percussion;
+   String key;
+   String[] keyNotes;
+   String[] allowedNotes;
+   int measureLength = 0;
    
 	// Empty constructor
-	public SadPattern(String k, String[] kn, String[] an, String lead) {
-		key = k;
-		keyNotes = kn;
-		allowedNotes = an;
-		melody = new Voice(lead);
-		chords = new Voice("Piano");
-		percussion = new Voice("Tubular_Bells");
+   public SadPattern(String k, String[] kn, String[] an, String lead) {
+      key = k;
+      keyNotes = kn;
+      allowedNotes = an;
+      melody = new Voice(lead);
+      chords = new Voice("Piano");
+      percussion = new Voice("Tubular_Bells");
    }
    
    // Enum which contains all the chord types, which can be used to determine chords regardless of key.
@@ -68,7 +68,7 @@ public class SadPattern {
       }
       // Viable chords: 1
       else if(prevChord == Chords.FiveMajor) {
-            return Chords.OneMinor;
+         return Chords.OneMinor;
       }
       // Viable chords: 2, 4
       else /*if(prevChord == SixMajor*/ {
@@ -189,7 +189,7 @@ public class SadPattern {
          for(int j = 0; j < noteLetters.length; j++) {
          	// If the letter equals the first character of the allowed notes
             if(noteLetters[j].equals(allowedNotes[i].substring(0,1))) {
-			   valid.add(allowedNotes[i]);
+               valid.add(allowedNotes[i]);
                j = noteLetters.length+1;
             }
          }
@@ -203,92 +203,92 @@ public class SadPattern {
    	// Source and destination, source must be lower than the destination
    	
    	// Have set number of notes to reach destination: 1 to 4
-	// 1(5%): w 2(15%): h h 3(30%): h q q 4(50%): q q q q
-		int numNotes;
-		int noteDecider = (int)(Math.random()*100);
-		if(noteDecider >= 50) 
-			numNotes = 4;
-		else if(noteDecider >= 20)
-			numNotes = 3;
-		else if(noteDecider >= 5)
-			numNotes = 2;
-		else
-			numNotes = 1;
-
+   // 1(5%): w 2(15%): h h 3(30%): h q q 4(50%): q q q q
+      int numNotes;
+      int noteDecider = (int)(Math.random()*100);
+      if(noteDecider >= 50) 
+         numNotes = 4;
+      else if(noteDecider >= 20)
+         numNotes = 3;
+      else if(noteDecider >= 5)
+         numNotes = 2;
+      else
+         numNotes = 1;
+   
       phrase = new String[numNotes];
       for(int i = 0; i < phrase.length; i++) {
          phrase[i] = ""; // just init
       }
-	  
-	  
-		// Valid source and destination notes
-	   ArrayList<String> validChordTones = GetAllowedChordTones(progression);
-	   int sourceDecider = (int)(Math.random()*validChordTones.size()/2)+(validChordTones.size()/2);
-	   String source = validChordTones.get(sourceDecider);
-	   
-	   int destDecider = (int)(Math.random()*(int)validChordTones.size()/2);
-	   String destination = validChordTones.get(destDecider);
-	   
-	   // If 1 note: just play source as a whole note
-	  if(numNotes == 1) {
-		phrase[0] = source+"w";
-	  }
-	  // If two notes: play source and destination as two half notes
-	  else if(numNotes == 2) {
-		phrase[0] = source+"h";
-		phrase[1] = destination+"h";
-	  }
-	  // If three notes: either h q q or q q h
-	  // If h q q(35%): source - step down (65%) or chord tone down (35%), destination
-	  // If q q h(65%): source - step up (20%) or down (80%) - destination
-	  else if(numNotes == 3) {
-		int halfDecider = (int)(Math.random()*20);
-		if(halfDecider >= 6) {
-			// q q h
-			phrase[0] = source+"q";
-			int nextDecider = (int)(Math.random()*20);
-			if(nextDecider >= 6) {
-				// Step down
-				phrase[1] = GetStepDown(source)+"q";
-			}
-			else {
-				// Chord tone down
-				phrase[1] = validChordTones.get(sourceDecider-1)+"q";
-			}
-			phrase[2] = destination+"h";
-		}
-		else  {
-			// h q q
-			phrase[0] = source+"h";
-			int moarDeciders = (int)(Math.random()*5);
-			if(moarDeciders == 0) {
-				// Step up
-				phrase[1] = GetStepUp(source);
-			}
-			else {
-				// Step down
-				phrase[1] = GetStepDown(source);
-			}
-			phrase[2] = destination+"q";
-		}
-	  }
-	  // If four notes: source - step up step down (30%) / step down step down (70%) - dest
-	  else /* if(numNotes == 4) */ {
-		  int flipDecider = (int)(Math.random()*10);
-		  phrase[0] = source+"q";
-		  if(flipDecider <= 2) {
-			// Step up step down
-			phrase[1] = GetStepUp(source)+"q";
-			phrase[2] = GetStepDown(source)+"q";
-		  }
-		  else {
-			// step down step down 
-			phrase[1] = GetStepDown(source)+"q";
-			String prevNote = GetStepDown(source); // Without this everything breaks. Thanks for the 30 minutes of debugging fun.
-			phrase[2] = GetStepDown(prevNote)+"q";
-		  }
-		  phrase[3] = destination+"q";
-	  }
+     
+     
+   	// Valid source and destination notes
+      ArrayList<String> validChordTones = GetAllowedChordTones(progression);
+      int sourceDecider = (int)(Math.random()*validChordTones.size()/2)+(validChordTones.size()/2);
+      String source = validChordTones.get(sourceDecider);
+      
+      int destDecider = (int)(Math.random()*(int)validChordTones.size()/2);
+      String destination = validChordTones.get(destDecider);
+      
+      // If 1 note: just play source as a whole note
+      if(numNotes == 1) {
+         phrase[0] = source+"w";
+      }
+      // If two notes: play source and destination as two half notes
+      else if(numNotes == 2) {
+         phrase[0] = source+"h";
+         phrase[1] = destination+"h";
+      }
+      // If three notes: either h q q or q q h
+      // If h q q(35%): source - step down (65%) or chord tone down (35%), destination
+      // If q q h(65%): source - step up (20%) or down (80%) - destination
+      else if(numNotes == 3) {
+         int halfDecider = (int)(Math.random()*20);
+         if(halfDecider >= 6) {
+         // q q h
+            phrase[0] = source+"q";
+            int nextDecider = (int)(Math.random()*20);
+            if(nextDecider >= 6) {
+            // Step down
+               phrase[1] = GetStepDown(source)+"q";
+            }
+            else {
+            // Chord tone down
+               phrase[1] = validChordTones.get(sourceDecider-1)+"q";
+            }
+            phrase[2] = destination+"h";
+         }
+         else  {
+         // h q q
+            phrase[0] = source+"h";
+            int moarDeciders = (int)(Math.random()*5);
+            if(moarDeciders == 0) {
+            // Step up
+               phrase[1] = GetStepUp(source);
+            }
+            else {
+            // Step down
+               phrase[1] = GetStepDown(source);
+            }
+            phrase[2] = destination+"q";
+         }
+      }
+      // If four notes: source - step up step down (30%) / step down step down (70%) - dest
+      else /* if(numNotes == 4) */ {
+         int flipDecider = (int)(Math.random()*10);
+         phrase[0] = source+"q";
+         if(flipDecider <= 2) {
+         // Step up step down
+            phrase[1] = GetStepUp(source)+"q";
+            phrase[2] = GetStepDown(source)+"q";
+         }
+         else {
+         // step down step down 
+            phrase[1] = GetStepDown(source)+"q";
+            String prevNote = GetStepDown(source); // Without this everything breaks. Thanks for the 30 minutes of debugging fun.
+            phrase[2] = GetStepDown(prevNote)+"q";
+         }
+         phrase[3] = destination+"q";
+      }
    	
       return phrase;
    }
@@ -298,48 +298,48 @@ public class SadPattern {
       ArrayList<String> measureNotes = new ArrayList<String>();
       for(int i = 0; i < 4; i++) {
          String[] thisMeasure = createSingleMeasure(progression[i]);
-		 System.out.print("Print single measure:");
-		 for(int j = 0; j < thisMeasure.length; j++) {
-			System.out.print(thisMeasure[j]);
-		 }
-		 System.out.println("");
+         System.out.print("Print single measure:");
+         for(int j = 0; j < thisMeasure.length; j++) {
+            System.out.print(thisMeasure[j]);
+         }
+         System.out.println("");
          for(int j = 0; j < thisMeasure.length; j++) {
             measureNotes.add(thisMeasure[j]);
          }
          measureLength++;
       }
-	  
-	  // Check if it should be extended - tabled until after demo.
-	  
+     
+     // Check if it should be extended - tabled until after demo.
+     
       return measureNotes;
    }
 	
    private ArrayList<String> makeChordNotes(Chords[] progression) {
       ArrayList<String> measure = new ArrayList<String>();
-	  String chordMeasure;
+      String chordMeasure;
       for(int i = 0; i < progression.length; i++) {
-		  chordMeasure = "";
-		  // Whole notes as chord or half note root, half note chord
+         chordMeasure = "";
+        // Whole notes as chord or half note root, half note chord
          String chord = getChordNotes(progression[i]);
          String chordRoot = chord.charAt(0)+"";
-		 int rhythmDecider = (int)(Math.random()*2);
-		 if(rhythmDecider == 0)
-			 chordMeasure = chord+"w ";
-		 else
-			 chordMeasure = chord+"h "+chordRoot+"h ";
+         int rhythmDecider = (int)(Math.random()*2);
+         if(rhythmDecider == 0)
+            chordMeasure = chord+"w ";
+         else
+            chordMeasure = chord+"h "+chordRoot+"h ";
          measure.add(chordMeasure);
       }
       return measure;
    }
    
-	private ArrayList<String> makePercussionNotes(Chords[] progression) {
-		ArrayList<String> percus = new ArrayList<String>();
-		for(int i = 0; i < progression.length; i++) {
-			String chord = getChordNotes(progression[i]);
-			percus.add(chord.charAt(0)+"w");
-		}
-		return percus;
-	}
+   private ArrayList<String> makePercussionNotes(Chords[] progression) {
+      ArrayList<String> percus = new ArrayList<String>();
+      for(int i = 0; i < progression.length; i++) {
+         String chord = getChordNotes(progression[i]);
+         percus.add(chord.charAt(0)+"w");
+      }
+      return percus;
+   }
 	
     // Method to play the melody that is created
    public void generatePattern(Song song) {
@@ -352,11 +352,11 @@ public class SadPattern {
       for(int i = 0; i < 3; i++) {
          measureLength = 0;
          ArrayList<String> a = generateSmallPhrase(baseProgression);
-		 System.out.println("First phrase: ");
-		 for(int j = 0; j < a.size(); j++) {
-			System.out.print(a.get(j));
-		 }
-		 System.out.println("");
+         System.out.println("First phrase: ");
+         for(int j = 0; j < a.size(); j++) {
+            System.out.print(a.get(j));
+         }
+         System.out.println("");
          ArrayList<String> b = generateSmallPhrase(baseProgression);
          ArrayList<String> c = generateSmallPhrase(baseProgression);
         
@@ -393,13 +393,13 @@ public class SadPattern {
       song.addVoice(chords);
      
      // Create the percussion accompaniment
-	 ArrayList<String> perMeasures = makePercussionNotes(baseProgression);
-	 for(int i = 0; i < measuresOfChords; i++) {
-		Phrase p = new Phrase();
-		p.addNotes(perMeasures);
-		percussion.addPhrase(p);
-	 }
-	 
-	 song.addVoice(percussion);
+      ArrayList<String> perMeasures = makePercussionNotes(baseProgression);
+      for(int i = 0; i < measuresOfChords; i++) {
+         Phrase p = new Phrase();
+         p.addNotes(perMeasures);
+         percussion.addPhrase(p);
+      }
+    
+      song.addVoice(percussion);
    }
 }

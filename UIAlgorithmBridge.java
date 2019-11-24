@@ -274,26 +274,18 @@ public class UIAlgorithmBridge {
       thisPlayer.playSong(overAllSong);
    }
    private void handlePause() {
-   
+      thisPlayer.pauseSong();
    }
    private void handleSave() {
-   
+      thisPlayer.saveSong("Song");
    }
    private void handleBrowse() {
-   
+      thisPlayer.setLoadedFile(request.getFile());
    }
    private void handlePlayLoaded() {
-   
+      thisPlayer.playLoadedFile();
    }
    private void handleUnpause() {
-   
-      // Have the song go through the various song rule decorators
-      /*   t.generateSong(s);
-         
-         // Send the completed song to the player
-         System.out.println(s.toString());
-         thisPlayer.playSong(s);
-      }
-      return true;*/
+      thisPlayer.unpauseSong();
    }
 }

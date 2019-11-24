@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
+import java.io.File;
 
 import javax.swing.SwingConstants;
 import javax.swing.AbstractAction;
@@ -34,6 +35,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.border.LineBorder;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView; 
 
 import java.util.ArrayList;
 
@@ -652,8 +656,8 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       else if(action.equals("Save") == true)
          thisRequest = createGenerateRequest(2);
       else if(action.equals("Load") == true) {
-         btnPlay.setText("Play");
          thisRequest = createGenerateRequest(3);
+         btnPlay.setText("Play");
       }
       else if(action.equals("Play") == true) {
          thisRequest = createGenerateRequest(4);
@@ -687,14 +691,24 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       // Need request type, leading instrument(s), theme(s)
       // Request
       UIEnums.RequestType req;
+      File selectedFile = null;
       if(ReqType == 0)
          req = UIEnums.RequestType.GENERATE;
       else if(ReqType == 1)
          req = UIEnums.RequestType.PAUSE;
       else if(ReqType == 2)
          req = UIEnums.RequestType.SAVE;
-      else if(ReqType == 3)
+      else if(ReqType == 3) {
          req = UIEnums.RequestType.BROWSE;
+         JFileChooser jfc = new JFileChooser(/*FileSystemView.getFileSystemView().getHomeDirectory()*/);
+      
+         int returnValue = jfc.showOpenDialog(null);      
+      
+         if (returnValue == JFileChooser.APPROVE_OPTION) {
+            selectedFile = jfc.getSelectedFile();
+            System.out.println(selectedFile.getAbsolutePath());
+         }
+      }
       else if(ReqType == 4)
          req = UIEnums.RequestType.PLAYLOADED;
       else //if(ReqType == 5)
@@ -781,7 +795,9 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
          instruments.add(UIEnums.Instrument.GUITAR);
       else if(secC_Strings_Button.isSelected() == true)
          instruments.add(UIEnums.Instrument.STRINGS);
-         
-      return new UIRequest(req, instruments, themes);
+      
+      UIRequest thisRequest = new UIRequest(req, instruments, themes);
+      thisRequest.setFile(selectedFile);
+      return thisRequest;
    }
 }
