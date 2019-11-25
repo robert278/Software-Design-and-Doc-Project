@@ -17,6 +17,8 @@ TODO: Fill in rules.
 
 */
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
@@ -29,7 +31,7 @@ class melody implements PatternRuleSet {
    
    // Returns a single pattern which contains 8 4/4 measures, all of which follow the
    // rules listed above. 
-   public Pattern generatePattern() {
+   public String generateString() {
       int duration = 32;
       int i=0;
    	
@@ -75,6 +77,33 @@ class melody implements PatternRuleSet {
          pattern = pattern+" ";
          i = i+1;
       }
-      return new Pattern(pattern);	  
+      return pattern;	  
    }
+   public Pattern generatePattern() {
+	   return new Pattern(generateString());
+   }
+   public Song generateSong() {  //convert to Song from pattern
+	   //a song with two voices, each with three phrases
+	   Song s = new Song();
+	   for(int ii=0;ii<2;ii++) {
+		   String instrument = "piano";  //any instruments
+		   Voice v = new Voice(instrument);
+		   for(int jj=0;jj<3;jj++) {
+			   String a = generateString();
+		   	   String[] lis = a.split(" ");
+		   	   Phrase p = new Phrase();
+		   	   p.addNotes(lis);
+		   	   v.addPhrase(p);
+		   }//end with adding phrases to voices
+	   	   s.addVoice(v);
+	   }//end with adding voices to songs
+	   
+	   return s;
+   }
+
+@Override
+public void generatePattern(Song s) {
+	// TODO Auto-generated method stub
+	
+}
 }
