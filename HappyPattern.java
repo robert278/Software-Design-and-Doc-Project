@@ -1,3 +1,20 @@
+/*
+
+  _    _                         _____      _   _                  
+ | |  | |                       |  __ \    | | | |                 
+ | |__| | __ _ _ __  _ __  _   _| |__) |_ _| |_| |_ ___ _ __ _ __  
+ |  __  |/ _` | '_ \| '_ \| | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+ | |  | | (_| | |_) | |_) | |_| | |  | (_| | |_| ||  __/ |  | | | |
+ |_|  |_|\__,_| .__/| .__/ \__, |_|   \__,_|\__|\__\___|_|  |_| |_|
+              | |   | |     __/ |                                  
+              |_|   |_|    |___/                                  
+  
+The file contains the code that modifies the song object to include a calm melody and chord progression.
+This includes the possible chord progressions, how the notes and rhythms of the melody are determined,
+and how the pieces are fit together, in what patterns.
+
+*/
+
 import org.jfugue.pattern.Pattern;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -471,26 +488,26 @@ public class HappyPattern implements PatternRuleSet {
          Phrase p = new Phrase(a);
          p.addNotes(b);
          p.addNotes(c);
-         //p.addNotes(b);
-         //p.addNotes(c);
-         //p.addNotes(a);
+         p.addNotes(b);
+         p.addNotes(c);
+         p.addNotes(a);
          phraseLength[i] = measureLength; //* 2;
          melodyPhrases[i] = p;
 		 melodyPhrases[i].setVolume(100, 50);
       }
    	// Add phrases to the voice - ABAC pattern
       melody.addPhrase(melodyPhrases[0]);
-      //melody.addPhrase(melodyPhrases[1]);
-      //melody.addPhrase(melodyPhrases[0]);
-      //melody.addPhrase(melodyPhrases[2]);
+      melody.addPhrase(melodyPhrases[1]);
+      melody.addPhrase(melodyPhrases[0]);
+      melody.addPhrase(melodyPhrases[2]);
    	
      
      // Create the chord voice
       song.addVoice(melody);
      
      // Create the chord voice
-      //int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
-	  int measuresOfChords = phraseLength[0];
+     int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
+	  //int measuresOfChords = phraseLength[0];
       ArrayList<String> fourMeasures = makeChordNotes(baseProgression);
      // Repeat fourMeasures measuresOfChords times
       for(int i = 0; i < measuresOfChords/3; i++) {

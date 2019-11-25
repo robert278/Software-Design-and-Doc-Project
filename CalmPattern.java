@@ -1,3 +1,18 @@
+/*
+
+   _____      _           _____      _   _                  
+  / ____|    | |         |  __ \    | | | |                 
+ | |     __ _| |_ __ ___ | |__) |_ _| |_| |_ ___ _ __ _ __  
+ | |    / _` | | '_ ` _ \|  ___/ _` | __| __/ _ \ '__| '_ \ 
+ | |___| (_| | | | | | | | |  | (_| | |_| ||  __/ |  | | | |
+  \_____\__,_|_|_| |_| |_|_|   \__,_|\__|\__\___|_|  |_| |_|
+  
+The file contains the code that modifies the song object to include a calm melody and chord progression.
+This includes the possible chord progressions, how the notes and rhythms of the melody are determined,
+and how the pieces are fit together, in what patterns.
+
+*/
+
 import org.jfugue.pattern.Pattern;
 import java.util.ArrayList;
 import java.util.Collections;

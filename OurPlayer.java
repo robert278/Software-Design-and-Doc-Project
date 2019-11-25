@@ -7,8 +7,15 @@
   \____/ \__,_|_|  |_|    |_|\__,_|\__, |\___|_|   
                                     __/ |          
                                    |___/           
-A file which is used to play, pause, and save songs which are created by the
-generator. 
+A file which is used to play, pause, and save songs. The playing, pausing, and unpausing of songs is done via
+threading. This is because the regular jfugue player play methods do not return until after the pattern that is
+being played as completed, thus making the use of the rest of the program impossible. In addition, the jfugue player
+used here is a ManagedPlayer, not a Player, which is required because of the fact that the pause functionality is not
+inherient in the regular player. 
+
+The managed player is accessed through a seperate class, ThreadPlayer, which is included in this file due to
+the fact that OurPlayer is the only class which instantiates or uses it.
+
 */
 
 import java.io.File;
@@ -40,12 +47,15 @@ public class OurPlayer {
       currSong = new Song();
    }
    
+   // Sets a loaded file for use by this player.
    public boolean setLoadedFile(File f) {
       loadedFile = f;
       System.out.println("Loaded file set.");
       return true;
    }
    
+   
+   // Play whatever the loaded file is.
    public boolean playLoadedFile() {
       Sequence savedSequence = null;
       try { 

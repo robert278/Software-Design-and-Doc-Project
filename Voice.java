@@ -1,3 +1,16 @@
+/*
+
+ __      __   _          
+ \ \    / /  (_)         
+  \ \  / /__  _  ___ ___ 
+   \ \/ / _ \| |/ __/ _ \
+    \  / (_) | | (_|  __/
+     \/ \___/|_|\___\___|
+                         
+The voice file is used to store a single instrument melody. Each voice has only a single melody 
+
+*/
+
 import java.util.ArrayList;
 
 public class Voice {
