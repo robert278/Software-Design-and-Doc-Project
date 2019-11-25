@@ -809,6 +809,8 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       else if(secC_Strings_Button.isSelected() == true)
          instruments.add(UIEnums.Instrument.STRINGS);
       
+      System.out.println("There are "+instruments.size()+" instruments in this request");
+      System.out.println("There are "+themes.size()+" themes in this request.");
       UIRequest thisRequest = new UIRequest(req, instruments, themes);
       thisRequest.setFile(selectedFile);
       return thisRequest;

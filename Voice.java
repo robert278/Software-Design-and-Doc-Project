@@ -7,7 +7,7 @@
     \  / (_) | | (_|  __/
      \/ \___/|_|\___\___|
                          
-The voice file is used to store a single instrument melody. Each voice has only a single melody 
+The voice file is used to store a single instrument melody. Each voice has only a single instrument.
 
 */
 

@@ -61,7 +61,9 @@ public class UIAlgorithmBridge {
    
    // Private helper methods for each type of request
    private void handleGenerate() {
-     // Create an empty song
+      System.out.println("There are "+request.GetNumInstruments()+" instruments in this request");
+      System.out.println("There are "+request.GetNumThemes()+" themes in this request.");
+      // Create an empty song
       Song overAllSong = new Song();
       // Generate a number of songs equal to the number of themes selected.
       for(int i = 0; i < request.GetNumThemes(); i++) {
@@ -110,7 +112,7 @@ public class UIAlgorithmBridge {
          }
          else if(theme == UIEnums.Theme.CALM) {
             t = new TempoDecorator((int)(Math.random()*10)+70);
-            //CalmPattern calm = new CalmPattern();
+            CalmPattern calm = new CalmPattern("B", BNotes, BAllowedNotes, lead);
          }
          else if(theme == UIEnums.Theme.SAD) {
             SadPattern sad;
