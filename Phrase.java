@@ -1,21 +1,3 @@
-/*
-
-  _____  _                        
- |  __ \| |                       
- | |__) | |__  _ __ __ _ ___  ___ 
- |  ___/| '_ \| '__/ _` / __|/ _ \
- | |    | | | | | | (_| \__ \  __/
- |_|    |_| |_|_|  \__,_|___/\___|
-                                  
-
-The phrase is used to represent our equivalent of "measures" for each voice. These "measures" are not strictly measures
-in the musical sense, as they can be much longer than what the 4/4 time signature (or whichever time signature is
-used for the song). 
-
-The phrases are the building blocks for voices, and themselves contain many notes.
-
-*/
-
 import java.util.ArrayList;
 
 public class Phrase {
@@ -40,7 +22,9 @@ public class Phrase {
       notes.addAll(extraNotes);
       return true;
    }
-   
+   public ArrayList<String> getnotes(){
+	   return notes;
+   }
    // Appends notes to the end of the phrase
    public boolean addNotes(String[] extraNotes) {
       for(int i = 0; i < extraNotes.length; i++) {
@@ -72,13 +56,11 @@ public class Phrase {
       return true;
    }
    
-   // Wipes the phrase.
    public boolean clear() {
       notes.clear();
       return true;
    }
    
-   // Puts the phrase into jfugue notation
    public String toString() {
       String phrase = "";
       for(int i = 0; i < notes.size(); i++) {

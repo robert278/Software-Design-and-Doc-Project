@@ -17,6 +17,8 @@ TODO: Fill in rules.
 
 */
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
@@ -29,12 +31,12 @@ class melody implements PatternRuleSet {
    
    // Returns a single pattern which contains 8 4/4 measures, all of which follow the
    // rules listed above. 
-   public Pattern generatePattern() {
+   public String generateString() {
       int duration = 32;
       int i=0;
    	
       String[] letter = {"A","B","C","D","E","F","G"};
-      String[] number = {"4","5"};	
+      String[] number = {"4","5","6","7"};	
    			
       int[] charset=new int[duration];     //store [1,3,4,6,4,6,4,5,0,1,0.......] index of letter
       int[] intset= new int[duration]; //store [0,1,0,1,1......] index of number
@@ -43,7 +45,7 @@ class melody implements PatternRuleSet {
          Random rand = new Random();
          String alphabet;
          int n1 = rand.nextInt(7);
-         int n2 = rand.nextInt(2);
+         int n2 = rand.nextInt(4);
          if(i>1) {
             int dist = charset[i-1]-charset[i-2];
             int dist2 = intset[i-1]-intset[i-2];
@@ -75,6 +77,52 @@ class melody implements PatternRuleSet {
          pattern = pattern+" ";
          i = i+1;
       }
-      return new Pattern(pattern);	  
+      return pattern;	  
    }
+   public Pattern generatePattern() {
+	   return new Pattern(generateString());
+   }
+   public Song generateSong0(int tempo,String instrument, String a) {  //convert to Song from pattern
+	   //a song with two voices, each with three phrases
+	   Song s = new Song();
+	   s.setTempo(tempo);
+	   for(int ii=0;ii<2;ii++) {
+		   Voice v = new Voice(instrument);
+		   for(int jj=0;jj<3;jj++) {
+		   	   String[] lis = a.split(" ");
+		   	   Phrase p = new Phrase();
+		   	   p.addNotes(lis);
+		   	   v.addPhrase(p);
+		   }//end with adding phrases to voices
+	   	   s.addVoice(v);
+	   }//end with adding voices to songs
+	   
+	   return s;
+   }
+   public Song generateSong() {  //convert to Song from pattern default tempo=3,instrument="piano",pattern is random
+	   //a song with two voices, each with three phrases
+	   int tempo = 3;
+	   String instrument = "piano";
+	   String a = generateString();
+	   Song s = new Song();
+	   s.setTempo(tempo);
+	   for(int ii=0;ii<2;ii++) {
+		   Voice v = new Voice(instrument);
+		   for(int jj=0;jj<3;jj++) {
+		   	   String[] lis = a.split(" ");
+		   	   Phrase p = new Phrase();
+		   	   p.addNotes(lis);
+		   	   v.addPhrase(p);
+		   }//end with adding phrases to voices
+	   	   s.addVoice(v);
+	   }//end with adding voices to songs
+	   
+	   return s;
+   }
+
+@Override
+public void generatePattern(Song s) {
+	// TODO Auto-generated method stub
+	
+}
 }
