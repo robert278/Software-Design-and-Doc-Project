@@ -21,6 +21,8 @@ the fact that OurPlayer is the only class which instantiates or uses it.
 import java.io.File;
 import java.io.IOException;
 
+import java.util.ArrayList;
+
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 import org.jfugue.player.ManagedPlayer;
@@ -57,6 +59,7 @@ public class OurPlayer {
    
    // Play whatever the loaded file is.
    public boolean playLoadedFile() {
+      
       Sequence savedSequence = null;
       try { 
          savedSequence = MidiSystem.getSequence(loadedFile);
@@ -72,9 +75,35 @@ public class OurPlayer {
       tp.run();
       return true;
    }
+   
+   public void playMultiSong(MultiSong ms) {
+      // Save multisong into a single sequence
+      Pattern p = new Pattern(ms.toString());
+      try {
+         MidiFileManager.savePatternToMidi(p,new File("currSong"+".mid"));
+      }
+      catch (IOException e) {
+         System.err.println(e.getMessage());
+         e.printStackTrace();
+      }
+      // Play that sequence
+      File savedFile = new File("currSong.mid");
+      Sequence savedSequence = null;
+      try { 
+         savedSequence = MidiSystem.getSequence(savedFile);
+      }
+      catch(Exception e) {
+         System.err.println(e.getMessage());
+         e.printStackTrace();
+      }
+   
+      tp.setSequence(savedSequence);
+      tp.run();
+   }
 
    // Sets a song to be the current song, and then plays the song.
    public void playSong(Song s) {
+      
       currSong = s;
       saveSong("currSong");
       
@@ -116,6 +145,8 @@ public class OurPlayer {
 }
 
 // ThreadPlayer needs to be the one that is actually playing or saving or whatever.
+// When the threadplayer run is called, all sequences that have been added to the player
+// are played.
 // Has it's own player
 class ThreadPlayer extends Thread {
    private ManagedPlayer jfplayer;

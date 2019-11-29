@@ -315,11 +315,11 @@ public class SadPattern {
       ArrayList<String> measureNotes = new ArrayList<String>();
       for(int i = 0; i < 4; i++) {
          String[] thisMeasure = createSingleMeasure(progression[i]);
-         System.out.print("Print single measure:");
+         /*System.out.print("Print single measure:");
          for(int j = 0; j < thisMeasure.length; j++) {
             System.out.print(thisMeasure[j]);
          }
-         System.out.println("");
+         System.out.println("");*/
          for(int j = 0; j < thisMeasure.length; j++) {
             measureNotes.add(thisMeasure[j]);
          }
@@ -369,11 +369,11 @@ public class SadPattern {
       for(int i = 0; i < 3; i++) {
          measureLength = 0;
          ArrayList<String> a = generateSmallPhrase(baseProgression);
-         System.out.println("First phrase: ");
+         /*System.out.println("First phrase: ");
          for(int j = 0; j < a.size(); j++) {
             System.out.print(a.get(j));
          }
-         System.out.println("");
+         System.out.println("");*/
          ArrayList<String> b = generateSmallPhrase(baseProgression);
          ArrayList<String> c = generateSmallPhrase(baseProgression);
         
@@ -381,27 +381,33 @@ public class SadPattern {
          Phrase p = new Phrase(a);
          p.addNotes(b);
          p.addNotes(c);
-         p.addNotes(b);
-         p.addNotes(c);
-         p.addNotes(a);
-         phraseLength[i] = measureLength * 2;
+         //p.addNotes(b);
+         //p.addNotes(c);
+         //p.addNotes(a);
+         phraseLength[i] = measureLength; // * 2;
          melodyPhrases[i] = p;
       }
    	// Add phrases to the voice - ABAC pattern
       melody.addPhrase(melodyPhrases[0]);
-      melody.addPhrase(melodyPhrases[1]);
-      melody.addPhrase(melodyPhrases[0]);
-      melody.addPhrase(melodyPhrases[2]);
-   	
+      //melody.addPhrase(melodyPhrases[1]);
+      //melody.addPhrase(melodyPhrases[0]);
+      //melody.addPhrase(melodyPhrases[2]);
+      
+      // Add four beats of rests to the melody to balance out chords.
+     Phrase blankMelody = new Phrase();
+     String[] fourMeasureBlanks = {"Rw Rw Rw Rw"};
+     blankMelody.addNotes(fourMeasureBlanks);
+     melody.addPhrase(blankMelody);
      
      // Create the chord voice
       song.addVoice(melody);
      
      // Create the chord voice
-      int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
+      //int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
+      int measuresOfChords = phraseLength[0];
       ArrayList<String> fourMeasures = makeChordNotes(baseProgression);
      // Repeat fourMeasures measuresOfChords times
-      for(int i = 0; i < measuresOfChords; i++) {
+      for(int i = 0; i < measuresOfChords/3; i++) {
          Phrase p = new Phrase();
          p.addNotes(fourMeasures);
          chords.addPhrase(p);
@@ -411,7 +417,7 @@ public class SadPattern {
      
      // Create the percussion accompaniment
       ArrayList<String> perMeasures = makePercussionNotes(baseProgression);
-      for(int i = 0; i < measuresOfChords; i++) {
+      for(int i = 0; i < measuresOfChords/3; i++) {
          Phrase p = new Phrase();
          p.addNotes(perMeasures);
          percussion.addPhrase(p);

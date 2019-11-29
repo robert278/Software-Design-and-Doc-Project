@@ -37,9 +37,9 @@ public class Song {
    }
    
    public String toString() {
-      String song = "T"+tempo+" ";
+      String song = ""; //"T"+tempo+" ";
       for(int i = 0; i < voices.size(); i++) {
-         song = song+" V"+i+" "+voices.get(i).toString();
+         song = song+" V"+i+" T"+tempo+" "+voices.get(i).toString();
       }
       return song;
    }

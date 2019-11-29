@@ -61,8 +61,9 @@ public class UIAlgorithmBridge {
    
    // Private helper methods for each type of request
    private void handleGenerate() {
-     // Create an empty song
-      Song overAllSong = new Song();
+     // Create a multi song
+     MultiSong bigSong = new MultiSong();
+     // ArrayList<Song> songs = new ArrayList<Song>();
       // Generate a number of songs equal to the number of themes selected.
       for(int i = 0; i < request.GetNumThemes(); i++) {
          TempoDecorator t;
@@ -109,22 +110,25 @@ public class UIAlgorithmBridge {
             happy.generatePattern(singlePart);
          }
          else if(theme == UIEnums.Theme.CALM) {
-            t = new TempoDecorator((int)(Math.random()*10)+70);
-            //CalmPattern calm = new CalmPattern();
+            t = new TempoDecorator((int)(Math.random()*10)+60);
+            CalmPattern calm = new CalmPattern("B", BNotes, BAllowedNotes, lead);
+            calm.generatePattern(singlePart);
          }
          else if(theme == UIEnums.Theme.SAD) {
             SadPattern sad;
-            t = new TempoDecorator((int)(Math.random()*70)+40);
+            t = new TempoDecorator((int)(Math.random()*60)+50);
             if(keyDecider == 0) {
                sad = new SadPattern("D", DNotes, DAllowedNotes, lead);
             }
             else {
                sad = new SadPattern("A", ANotes, AAllowedNotes, lead);
             }
+            sad.generatePattern(singlePart);
          }
          else if(theme == UIEnums.Theme.INTENSE) {
             t = new TempoDecorator((int)(Math.random()*50)+200);
-            // ??
+            CalmPattern calm = new CalmPattern("B", BNotes, BAllowedNotes, lead);
+            calm.generatePattern(singlePart);
          }
          else if(theme == UIEnums.Theme.SPOOKY) {
             t = new TempoDecorator((int)(Math.random()*80)+50);
@@ -134,12 +138,19 @@ public class UIAlgorithmBridge {
             t = new TempoDecorator((int)(Math.random()*100)+60);
             // ??
          }
-         // Combine part song with whole song
+         // Add the tempo to the song
          t.generateSong(singlePart);
-         overAllSong.addSong(singlePart);
+         // Add the section
+         bigSong.addSection(singlePart);
+         System.out.println(singlePart.toString());
       }
-      // Send overAllSong off to be played
-      thisPlayer.playSong(overAllSong);
+      // Play the songs
+      thisPlayer.playMultiSong(bigSong);
+      /*for(int i = 0; i < songs.size(); i++) {
+         System.out.println("Section #"+(i+1));
+         System.out.println(songs.get(i).toString());
+         thisPlayer.playSong(songs.get(i));
+      }*/
    }
    private void handlePause() {
       thisPlayer.pauseSong();

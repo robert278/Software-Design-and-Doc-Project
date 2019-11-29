@@ -289,7 +289,7 @@ public class HappyPattern implements PatternRuleSet {
          for(int j = 0; j < noteLetters.length; j++) {
          	// If the letter equals the first character of the allowed notes
             if(noteLetters[j].equals(allowedNotes[i].substring(0,1))) {
-			   valid.add(allowedNotes[i]);
+               valid.add(allowedNotes[i]);
                j = noteLetters.length+1;
             }
          }
@@ -429,7 +429,7 @@ public class HappyPattern implements PatternRuleSet {
    	// Check if it needs to be extended - Cut for demo.
       /*char lastNote = measureNotes.get(measureNotes.size()-1).charAt(0);
       if(lastNote == keyNotes[4].charAt(0) || lastNote == keyNotes[1].charAt(0)) {
-		 System.out.println("Ever extended?");
+   	 System.out.println("Ever extended?");
       	// repeat with an ending of a 1
          measureLength++;
          if(key.equals("C")) {
@@ -476,11 +476,11 @@ public class HappyPattern implements PatternRuleSet {
       for(int i = 0; i < 3; i++) {
          measureLength = 0;
          ArrayList<String> a = generateSmallPhrase(baseProgression);
-		 System.out.println("First phrase: ");
-		 for(int j = 0; j < a.size(); j++) {
-			System.out.print(a.get(j));
-		 }
-		 System.out.println("");
+         /*System.out.println("First phrase: ");
+         for(int j = 0; j < a.size(); j++) {
+            System.out.print(a.get(j));
+         }
+         System.out.println("");*/
          ArrayList<String> b = generateSmallPhrase(baseProgression);
          ArrayList<String> c = generateSmallPhrase(baseProgression);
         
@@ -488,38 +488,50 @@ public class HappyPattern implements PatternRuleSet {
          Phrase p = new Phrase(a);
          p.addNotes(b);
          p.addNotes(c);
-         p.addNotes(b);
-         p.addNotes(c);
-         p.addNotes(a);
+        // p.addNotes(b);
+         //p.addNotes(c);
+         //p.addNotes(a);
          phraseLength[i] = measureLength; //* 2;
          melodyPhrases[i] = p;
-		 melodyPhrases[i].setVolume(100, 50);
+         //melodyPhrases[i].setVolume(100, 50);
       }
    	// Add phrases to the voice - ABAC pattern
+     // melody.addPhrase(melodyPhrases[0]);
+     // melody.addPhrase(melodyPhrases[1]);
       melody.addPhrase(melodyPhrases[0]);
-      melody.addPhrase(melodyPhrases[1]);
-      melody.addPhrase(melodyPhrases[0]);
-      melody.addPhrase(melodyPhrases[2]);
+     // melody.addPhrase(melodyPhrases[2]);
+     // Add four beats of rests to the melody to balance out chords.
+      Phrase blankMelody = new Phrase();
+      String[] fourMeasureBlanks = {"Rw Rw Rw Rw"};
+      blankMelody.addNotes(fourMeasureBlanks);
+      melody.addPhrase(blankMelody);
    	
      
      // Create the chord voice
       song.addVoice(melody);
      
      // Create the chord voice
-     int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
-	  //int measuresOfChords = phraseLength[0];
+     //int measuresOfChords = (phraseLength[0]*2) + phraseLength[1] + phraseLength[2];
+      int measuresOfChords = phraseLength[0];
       ArrayList<String> fourMeasures = makeChordNotes(baseProgression);
      // Repeat fourMeasures measuresOfChords times
       for(int i = 0; i < measuresOfChords/3; i++) {
          Phrase p = new Phrase();
          p.addNotes(fourMeasures);
-		 //p.setVolume(100, 50);
+       //p.setVolume(100, 50);
          chords.addPhrase(p);
       }
      
       song.addVoice(chords);
      
-     // Create the percussion accompaniment - Not doing that for demo
+     // Create the percussion accompaniment - Needs to be blank for matching purposes
+      Phrase blankPercussion = new Phrase();
+      for(int i = 0; i < 4; i++)
+         blankPercussion.addNotes(fourMeasureBlanks);
+      percussion.addPhrase(blankPercussion);
+     
+      song.addVoice(percussion);
+     
    }
 
 }
