@@ -252,23 +252,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       secA_Intense_Button = new JRadioButton("");
       secA_ThemeGroup.add(secA_Intense_Button);
       SectionA_Theme_Panel.add(secA_Intense_Button, "4, 8");
-   	
-      JLabel secA_Oriental_Label = new JLabel("Oriental");
-      secA_Oriental_Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-      SectionA_Theme_Panel.add(secA_Oriental_Label, "2, 10");
-   	
-      secA_Oriental_Button = new JRadioButton("");
-      secA_ThemeGroup.add(secA_Oriental_Button);
-      SectionA_Theme_Panel.add(secA_Oriental_Button, "4, 10");
-   	
-      JLabel secA_Spooky_Label = new JLabel("Spooky");
-      secA_Spooky_Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-      SectionA_Theme_Panel.add(secA_Spooky_Label, "2, 12");
-   	
-      secA_Spooky_Button = new JRadioButton("");
-      secA_ThemeGroup.add(secA_Spooky_Button);
-      SectionA_Theme_Panel.add(secA_Spooky_Button, "4, 12");
-   	
+   	   	
       JPanel SectionA_LeadInstrument_Panel = new JPanel();
       SectionA_LeadInstrument_Panel.setBounds(140, 61, 110, 210);
       SectionA_Panel.add(SectionA_LeadInstrument_Panel);
@@ -417,23 +401,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       secB_Intense_Button = new JRadioButton("");
       secB_ThemeGroup.add(secB_Intense_Button);
       SectionB_Theme_Panel.add(secB_Intense_Button, "4, 8");
-   	
-      JLabel secB_Oriental_Label = new JLabel("Oriental");
-      secB_Oriental_Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-      SectionB_Theme_Panel.add(secB_Oriental_Label, "2, 10");
-   	
-      secB_Oriental_Button = new JRadioButton("");
-      secB_ThemeGroup.add(secB_Oriental_Button);
-      SectionB_Theme_Panel.add(secB_Oriental_Button, "4, 10");
-   	
-      JLabel secB_Spooky_Label = new JLabel("Spooky");
-      secB_Spooky_Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-      SectionB_Theme_Panel.add(secB_Spooky_Label, "2, 12");
-   	
-      secB_Spooky_Button = new JRadioButton("");
-      secB_ThemeGroup.add(secB_Spooky_Button);
-      SectionB_Theme_Panel.add(secB_Spooky_Button, "4, 12");
-   	
+   	   	
       JPanel SectionB_LeadInstrument_Panel = new JPanel();
       SectionB_LeadInstrument_Panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lead Instrument", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
       SectionB_LeadInstrument_Panel.setBounds(152, 61, 100, 210);
@@ -567,23 +535,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
       secC_Intense_Button = new JRadioButton("");
       secC_ThemeGroup.add(secC_Intense_Button);
       SectionC_Theme_Panel.add(secC_Intense_Button, "4, 8");
-   	
-      JLabel secC_Oriental_Label = new JLabel("Oriental");
-      secC_Oriental_Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-      SectionC_Theme_Panel.add(secC_Oriental_Label, "2, 10");
-   	
-      secC_Oriental_Button = new JRadioButton("");
-      secC_ThemeGroup.add(secC_Oriental_Button);
-      SectionC_Theme_Panel.add(secC_Oriental_Button, "4, 10");
-   	
-      JLabel secC_Spooky_Label = new JLabel("Spooky");
-      secC_Spooky_Label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-      SectionC_Theme_Panel.add(secC_Spooky_Label, "2, 12");
-   	
-      secC_Spooky_Button = new JRadioButton("");
-      secC_ThemeGroup.add(secC_Spooky_Button);
-      SectionC_Theme_Panel.add(secC_Spooky_Button, "4, 12");
-   	
+   	   	
       JPanel SectionC_LeadInstrument_Panel = new JPanel();
       SectionC_LeadInstrument_Panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lead Instrument", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
       SectionC_LeadInstrument_Panel.setBounds(140, 61, 110, 210);
@@ -738,10 +690,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
          themes.add(UIEnums.Theme.SAD);
       else if(secA_Intense_Button.isSelected() == true)
          themes.add(UIEnums.Theme.INTENSE);
-      else if(secA_Oriental_Button.isSelected() == true)
-         themes.add(UIEnums.Theme.ORIENTAL);
-      else if(secA_Spooky_Button.isSelected() == true)
-         themes.add(UIEnums.Theme.SPOOKY);
+
         
       // Section B
       if(secB_Happy_Button.isSelected() == true)
@@ -752,10 +701,7 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
          themes.add(UIEnums.Theme.SAD);
       else if(secB_Intense_Button.isSelected() == true)
          themes.add(UIEnums.Theme.INTENSE);
-      else if(secB_Oriental_Button.isSelected() == true)
-         themes.add(UIEnums.Theme.ORIENTAL);
-      else if(secB_Spooky_Button.isSelected() == true)
-         themes.add(UIEnums.Theme.SPOOKY);
+
          
       // Section C 
       if(secC_Happy_Button.isSelected() == true)
@@ -766,10 +712,6 @@ public class MusicGeneratorDriver extends JFrame implements ActionListener {
          themes.add(UIEnums.Theme.SAD);
       else if(secC_Intense_Button.isSelected() == true)
          themes.add(UIEnums.Theme.INTENSE);
-      else if(secC_Oriental_Button.isSelected() == true)
-         themes.add(UIEnums.Theme.ORIENTAL);
-      else if(secC_Spooky_Button.isSelected() == true)
-         themes.add(UIEnums.Theme.SPOOKY);
          
       // Reading in leading instruments
       ArrayList<UIEnums.Instrument> instruments = new ArrayList<UIEnums.Instrument>();
